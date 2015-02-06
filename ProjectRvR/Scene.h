@@ -5,6 +5,7 @@
 #include <SFML/Window.hpp>
 
 #include "RocketManager.h"
+#include "RocketPath.h"
 
 class Scene
 {
@@ -20,7 +21,8 @@ public:
 private:
 	sf::RenderWindow* window;
 	sf::Event* event;
-
+	RocketManager manager;
+	RocketPath* testPath;
 };
 
 
