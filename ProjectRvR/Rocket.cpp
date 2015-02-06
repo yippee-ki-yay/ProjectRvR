@@ -40,6 +40,11 @@ sf::CircleShape Rocket::getShape()
 	return shape;
 }
 
+void Rocket::setStatus(bool s)
+{
+	active = s;
+}
+
 
 
 

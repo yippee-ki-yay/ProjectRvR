@@ -34,6 +34,8 @@ class Rocket
 		void move();
 		void setFun(float c1, float c2, float c3);
 		sf::CircleShape getShape();
+		void setStatus(bool s);
+
 };
 
 #endif
