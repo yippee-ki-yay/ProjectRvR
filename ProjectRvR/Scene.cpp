@@ -2,7 +2,7 @@
 
 Scene::Scene(int width, int height, std::string title)
 {
-	window = new sf::Window(sf::VideoMode(width, height), title);
+	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	event = new sf::Event;
 
 	window->setFramerateLimit(60);
@@ -26,4 +26,7 @@ void Scene::update()
 		if(event->type == sf::Event::Closed)
 			window->close();
 	}
+
+	window->clear();
+	window->display();
 }

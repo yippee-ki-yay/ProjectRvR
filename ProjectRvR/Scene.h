@@ -4,6 +4,8 @@
 #include <string>
 #include <SFML/Window.hpp>
 
+#include "RocketManager.h"
+
 class Scene
 {
 public:
@@ -16,7 +18,7 @@ public:
 	void update();
 
 private:
-	sf::Window* window;
+	sf::RenderWindow* window;
 	sf::Event* event;
 
 };
