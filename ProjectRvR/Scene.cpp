@@ -10,6 +10,8 @@ Scene::Scene(int width, int height, std::string title)
 	window->setFramerateLimit(60);  //uvek da je 60fps moze da se promeni kasnije
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
+
+	pressed = false;
 }
 
 Scene::~Scene()
@@ -29,29 +31,31 @@ void Scene::update()
 	{
 		if(event->type == sf::Event::Closed)
 			window->close();
+
+		if (event->type == sf::Event::KeyPressed)
+		{
+			if(event->key.code == sf::Keyboard::Space)
+			{
+				if(manager.hasRockets())
+				{
+					Rocket* r = manager.getRocket();
+					r->setFun(0.001, 0, 0);
+					pressed = true;
+				}
+				
+			}
+		}
+  
 	}
 
 	window->clear();
 
 	/** TEST DEO KODA OKO KRETANJA */
 
-	Rocket* rocket = manager.getRocket();  //uzmemo prvu slobodnu raketu
 
-	double x = testPath->getX(); //trenutna x vrednost putanje
-
-	//obicno linearno kretanje, mogu i druge fije samo moram da izvalim kako pravilno da ih skaliram
-	double y = x; 
-
-	//testPath->followPath(rocket, x, y); //nakacis raketu i x, y putanju koju ce ona pratiti
-	rocket->setFun(0.001, 0, 0);
-	rocket->move();
 	manager.draw(window);  //crta rakete
+	base.draw(window);
 
-	//raketa
-
-	//r1.setFun(0.001, 0, 0);
-
-	//r1.move();
 
 	//window->draw(r1.getShape());
 

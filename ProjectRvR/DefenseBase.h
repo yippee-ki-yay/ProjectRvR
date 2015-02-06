@@ -6,9 +6,17 @@
 	racuna putanje i te kolizije i gluposti
 */
 
+#include <SFML/Graphics.hpp>
+
 class DefenseBase
 {
+public:
+	DefenseBase();
 
+	void draw(sf::RenderWindow* winodw);
+
+private:
+	sf::RectangleShape zgrada;
 };
 
 

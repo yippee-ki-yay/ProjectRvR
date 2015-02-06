@@ -7,6 +7,7 @@
 #include "RocketManager.h"
 #include "RocketPath.h"
 #include "Rocket.h"
+#include "DefenseBase.h"
 
 class Scene
 {
@@ -23,8 +24,11 @@ private:
 	sf::RenderWindow* window;
 	sf::Event* event;
 	RocketManager manager;
+	DefenseBase base;
 	RocketPath* testPath;
-	Rocket r1;
+	Rocket* r1;
+
+	bool pressed;
 };
 
 

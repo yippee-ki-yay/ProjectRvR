@@ -30,6 +30,9 @@ class Rocket
 
 		float getX() { return x; }
 		float getY() { return y; }
+
+		bool getActive(){return active;}
+		void setActive(bool ac){active = ac;}
  
 		void move();
 		void setFun(float c1, float c2, float c3);
