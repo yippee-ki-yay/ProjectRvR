@@ -1,4 +1,6 @@
 #include "Scene.h"
+#include "Rocket.h"
+#include <iostream>
 
 Scene::Scene(int width, int height, std::string title)
 {
@@ -33,16 +35,25 @@ void Scene::update()
 
 	/** TEST DEO KODA OKO KRETANJA */
 
-	sf::CircleShape* rocket = manager.getRocket();  //uzmemo prvu slobodnu raketu
+	Rocket* rocket = manager.getRocket();  //uzmemo prvu slobodnu raketu
 
 	double x = testPath->getX(); //trenutna x vrednost putanje
 
 	//obicno linearno kretanje, mogu i druge fije samo moram da izvalim kako pravilno da ih skaliram
 	double y = x; 
 
-	testPath->followPath(rocket, x, y); //nakacis raketu i x, y putanju koju ce ona pratiti
-
+	//testPath->followPath(rocket, x, y); //nakacis raketu i x, y putanju koju ce ona pratiti
+	rocket->setFun(0.001, 0, 0);
+	rocket->move();
 	manager.draw(window);  //crta rakete
+
+	//raketa
+
+	//r1.setFun(0.001, 0, 0);
+
+	//r1.move();
+
+	//window->draw(r1.getShape());
 
 	window->display();
 }

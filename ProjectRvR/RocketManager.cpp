@@ -4,9 +4,9 @@ RocketManager::RocketManager()
 {
 	for(int i = 0; i < MAX_ROCKETS; ++i)
 	{
-		rockets[i].setRadius(20);
-		rockets[i].setFillColor(sf::Color::Red);
-		rockets[i].setPosition(100+i*10, 100);
+		rockets[i].getShape().setRadius(20);
+		rockets[i].getShape().setFillColor(sf::Color::Red);
+		rockets[i].getShape().setPosition(100+i*10, 100);
 	}
 }
 
@@ -15,11 +15,11 @@ void RocketManager::draw(sf::RenderWindow* window)
 	//TODO: test kod za sada crta samo jednu raketu
 	//for(int i = 0; i < MAX_ROCKETS; ++i)
 	{
-		window->draw(rockets[0]);
+		window->draw(rockets[0].getShape());
 	}
 }
 
-sf::CircleShape* RocketManager::getRocket()
+Rocket* RocketManager::getRocket()
 {
 	//nadjes prvi koji je neaktivan i vratis ga nazad
 	//TODO: test kod za sada vraca samo prvu raketu

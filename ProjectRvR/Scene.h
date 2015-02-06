@@ -6,6 +6,7 @@
 
 #include "RocketManager.h"
 #include "RocketPath.h"
+#include "Rocket.h"
 
 class Scene
 {
@@ -23,6 +24,7 @@ private:
 	sf::Event* event;
 	RocketManager manager;
 	RocketPath* testPath;
+	Rocket r1;
 };
 
 
