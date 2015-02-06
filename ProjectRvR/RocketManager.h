@@ -17,9 +17,13 @@ public:
 
 	Rocket* getRocket();
 	void draw(sf::RenderWindow*);
+
+	bool hasRockets();
+
 private:
 	static const int MAX_ROCKETS = 20;  //max number of rockets on screen
 	Rocket rockets[20]; //TODO: switch to Rocket class later
+	bool outOfRockets;
 };
 
 
