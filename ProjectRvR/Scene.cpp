@@ -42,11 +42,11 @@ void Scene::update()
 				if(manager.hasRockets())
 				{
 					Rocket* r = manager.getRocket();
-					float x[3] = {300, 0, -300};
+					float x[3] = {400, 0, -400};
 					float y[3] = {300, -150, -300};
 
-					x[1] = rand()%400 - 200;
-					y[1] = rand()%400 - 200;
+					x[1] = rand()%200 - 100;
+					y[1] = rand()%200 - 100;
 
 					r->linterpFun(x, y);
 					pressed = true;
