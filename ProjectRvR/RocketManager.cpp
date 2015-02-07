@@ -67,3 +67,24 @@ void RocketManager::checkBounds()
 	}
 
 }
+
+bool RocketManager::hasRocketsAt(float x)
+{
+	for(int i = 0; i < MAX_ROCKETS; i++)
+	{
+		if(rockets[i].getShape().getPosition().x == x)
+			return true;
+	}
+
+	return false;
+}
+
+Rocket* RocketManager::getRocketAt(float x)
+{
+	for(int i = 0; i < MAX_ROCKETS; i++)
+	{
+		if(rockets[i].getShape().getPosition().x == x)					//TODO: izmeniti da raketa ima metodu getPosition(), da se ne poziva preko shape-a
+			return &rockets[i];
+	}
+	return NULL;
+}

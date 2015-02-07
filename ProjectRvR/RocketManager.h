@@ -22,9 +22,15 @@ public:
 
 	void checkBounds();
 
+	Rocket* getRocketAt(float x);				//vraca raketu u tacki
+
+	bool hasRocketsAt(float x);				//da li ima raketu u tacki
+
+	Rocket* getRockets() { return rockets; }
+
 private:
 	static const int MAX_ROCKETS = 60;  //max number of rockets on screen
-	Rocket rockets[MAX_ROCKETS]; //TODO: switch to Rocket class later
+	Rocket rockets[MAX_ROCKETS]; 
 	bool outOfRockets;
 };
 

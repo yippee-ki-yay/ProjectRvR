@@ -57,6 +57,9 @@ void Scene::update()
   
 	}
 
+	base.checkFirstWall(manager);
+
+
 	window->clear();
 
 	/** TEST DEO KODA OKO KRETANJA */
