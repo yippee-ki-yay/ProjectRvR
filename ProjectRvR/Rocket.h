@@ -35,6 +35,8 @@ class Rocket
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}
 
+		void reset(){x = 300; y = 0;active = false;}
+
 		void move();
 		sf::CircleShape getShape();
 		void setStatus(bool s);

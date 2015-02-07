@@ -12,11 +12,12 @@ Rocket::Rocket()
 	}
 	shape.setFillColor(sf::Color::Blue);
 	shape.setRadius(15);
-	shape.setPosition(x, y);
+	shape.setPosition(-100, y);
 }
 
 void Rocket::move()		//pomeranje x-a i racunanje y-a
 {
+	shape.setPosition(x, y);
 	x -= 1;							
 	y = fun[0]*x*x + fun[1]*x + fun[2];
 

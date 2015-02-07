@@ -20,9 +20,11 @@ public:
 
 	bool hasRockets();
 
+	void checkBounds();
+
 private:
-	static const int MAX_ROCKETS = 20;  //max number of rockets on screen
-	Rocket rockets[20]; //TODO: switch to Rocket class later
+	static const int MAX_ROCKETS = 60;  //max number of rockets on screen
+	Rocket rockets[MAX_ROCKETS]; //TODO: switch to Rocket class later
 	bool outOfRockets;
 };
 

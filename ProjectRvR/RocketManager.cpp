@@ -2,12 +2,12 @@
 
 RocketManager::RocketManager()
 {
-	for(int i = 0; i < MAX_ROCKETS; ++i)
+	/*for(int i = 0; i < MAX_ROCKETS; ++i)
 	{
 		rockets[i].getShape().setRadius(20);
 		rockets[i].getShape().setFillColor(sf::Color::Red);
 		rockets[i].getShape().setPosition(100+i*10, 100);
-	}
+	}*/
 
 	outOfRockets = false;
 }
@@ -49,4 +49,21 @@ bool RocketManager::hasRockets()
 	}
 
 	return false;
+}
+
+void RocketManager::checkBounds()
+{
+	for(int i = 0; i < MAX_ROCKETS; ++i)
+	{
+		if(rockets[i].getActive() == true)
+		{
+			sf::Vector2f pos = rockets[i].getShape().getPosition();
+
+			if(pos.x < 0 || pos.x > 800 || pos.y > 600 || pos.y < 0)
+			{
+				rockets[i].reset();
+			}
+		}
+	}
+
 }

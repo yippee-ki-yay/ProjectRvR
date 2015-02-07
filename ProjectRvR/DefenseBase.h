@@ -17,6 +17,9 @@ public:
 
 private:
 	sf::RectangleShape zgrada;
+	//Line su rectangle shape da bi mogli da imaju i width ako treba
+	sf::RectangleShape detectionLine;
+	sf::RectangleShape collisionLine;
 };
 
 
