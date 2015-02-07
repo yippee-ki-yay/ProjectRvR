@@ -2,6 +2,7 @@
 #include "Rocket.h"
 #include <iostream>
 
+
 Scene::Scene(int width, int height, std::string title)
 {
 	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
@@ -39,7 +40,14 @@ void Scene::update()
 				if(manager.hasRockets())
 				{
 					Rocket* r = manager.getRocket();
-					r->setFun(0.001, 0, 0);
+					float x[3] = {300, 0, -300};
+					float y[3] = {300, -150, -300};
+
+					x[1] = rand()%400 - 200;
+					y[1] = rand()%400 - 200;
+
+					r->linterpFun(x, y);
+					//r->setFun(0.001, 0, 0);
 					pressed = true;
 				}
 				
@@ -52,9 +60,9 @@ void Scene::update()
 
 	/** TEST DEO KODA OKO KRETANJA */
 
-
-	manager.draw(window);  //crta rakete
 	base.draw(window);
+	manager.draw(window);  //crta rakete
+
 
 
 	//window->draw(r1.getShape());
