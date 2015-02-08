@@ -70,7 +70,7 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 
 
 			Rocket *r = rockets.getRocket();
-			float *tmp;
+			//float *tmp;
 
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 			float x[3], y[3];
@@ -83,6 +83,13 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 
 			//interpolation(x, y, tmp);
 
+			r->setActive(true);
+			r->setFun(0, 1, 0);
+			r->setX(0);
+			r->setY(0);
+			r->getShape().setPosition(200, 200);
+
+			std::cout << r->getShape().getPosition().x << "x\n" << r->getShape().getPosition().y << "y\n";
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom

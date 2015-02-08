@@ -24,7 +24,7 @@ class Rocket
 		sf::CircleShape shape;
 		float fun[3];				//funkcija po kojoj se rakete krecu
 		float x, y;				//koordinate rakete
-		void setFun(float c1, float c2, float c3);
+		int type;				//0 napad, 1 odbrana
 
 	public:
 
@@ -35,6 +35,8 @@ class Rocket
 
 		float* getFun() { return fun; }
 
+		void setType(int t) { type = t; }
+
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}
 
@@ -44,6 +46,12 @@ class Rocket
 		sf::CircleShape getShape();
 		void setStatus(bool s);
 		void linterpFun(float *x, float* y);
+
+		void setFun(float c1, float c2, float c3);
+
+		void setX(float xx) { x = xx; }
+		void setY(float yy) { y = yy; }
+
 };
 
 #endif

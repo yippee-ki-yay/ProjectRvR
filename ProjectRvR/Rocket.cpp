@@ -13,12 +13,18 @@ Rocket::Rocket()
 	shape.setFillColor(sf::Color::Blue);
 	shape.setRadius(15);
 	shape.setPosition(-100, y);
+	type = 0;
 }
 
 void Rocket::move()		//pomeranje x-a i racunanje y-a
 {
-	shape.setPosition(x, y);
-	x -= 1;							
+	//shape.setPosition(x, y);
+	
+	if(type == 0)
+		x -= 10;							
+	else
+		x += 10;
+	
 	y = fun[0]*x*x + fun[1]*x + fun[2];
 
 	//y = x*x/1000;

@@ -34,6 +34,7 @@ Rocket* RocketManager::getRocket()
 		if(rockets[i].getActive() == false)
 		{
 			rockets[i].setActive(true);
+			std::cout << "raketa " << i << "je aktivna\n";
 			return &(rockets[i]);
 		}
 	}
