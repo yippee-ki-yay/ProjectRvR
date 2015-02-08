@@ -29,7 +29,12 @@ private:
 	//Line su rectangle shape da bi mogli da imaju i width ako treba
 	sf::RectangleShape detectionLine;
 	sf::RectangleShape collisionLine;
-	std::vector<Rocket> det_rockets;
+	std::vector<Rocket*> det_rockets;
+	int count;
+	struct Point{int x; int y;};
+	std::vector<Point> points;
+
+	void setPoint(sf::Vector2f v);
 };
 
 

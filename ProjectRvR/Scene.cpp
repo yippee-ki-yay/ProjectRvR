@@ -74,7 +74,7 @@ void Scene::update()
 	window->display();
 
 	sf::Time t = clock.getElapsedTime();
-	std::cout<<1.0f/t.asSeconds()<<std::endl;
+	//std::cout<<1.0f/t.asSeconds()<<std::endl;
 	clock.restart().asSeconds();
 
 }

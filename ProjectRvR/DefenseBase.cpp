@@ -15,6 +15,8 @@ DefenseBase::DefenseBase()
 	collisionLine.setPosition(200, 0);
 	collisionLine.setRotation(90);
 	collisionLine.setFillColor(sf::Color::White);
+
+	count = 0;
 }
 
 
@@ -30,7 +32,7 @@ void DefenseBase::checkFirstWall(RocketManager rockets)
 	if(rockets.hasRocketsAt(detectionLine.getPosition().x))
 	{
 		Rocket* r = rockets.getRocketAt((detectionLine.getPosition().x));
-		det_rockets.push_back(*r);
+		det_rockets.push_back(r);
 		std::cout << "Detected rocket" << std::endl;
 	}
 }
@@ -46,33 +48,52 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 
 		//GRESKA: raketa mi ne vraca dobro svoje pozicije zasto?
 
-		if(det_rockets[i].getShape().getPosition().x == 500)
-			det_rockets[i].savePoint(det_rockets[i].getX(), det_rockets[i].getY());
+		if(det_rockets[i]->getShape().getPosition().x == 500)
+		{
+			setPoint(det_rockets[i]->getShape().getPosition());
+			std::cout<<"Dodao\n";
+		}
 
-		if(det_rockets[i].getShape().getPosition().x == 400)
-			det_rockets[i].savePoint(det_rockets[i].getX(),  det_rockets[i].getY());
+		if(det_rockets[i]->getShape().getPosition().x == 400)
+		{
+			setPoint(det_rockets[i]->getShape().getPosition());
+			std::cout<<"Dodao\n";
+		}
+			
 
-		if(det_rockets[i].getShape().getPosition().x == 300)
-			det_rockets[i].savePoint(det_rockets[i].getX(), det_rockets[i].getY() );
+		if(det_rockets[i]->getShape().getPosition().x == 300)
+		{
+			setPoint(det_rockets[i]->getShape().getPosition());
+			std::cout<<"Dodao\n";
+		}
 
-		if(det_rockets[i].numPoints() == 3)
+		if(count == 3)
 		{
 
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 			float x[3], y[3];
 			for(int j = 0; j < 3; ++j)
 			{
-				x[j] = det_rockets[i].getPointX(i);
-				y[j] = det_rockets[i].getPointY(i);
+				x[j] = points[j].x;
+				y[j] = points[j].y;
 				std::cout<<x[j]<<" "<<y[j]<<std::endl;
 			}
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
 			det_rockets.pop_back();
+			points.clear();
 			
-
+			count = 0;
 		}
 
 	}
+}
+
+void DefenseBase::setPoint(sf::Vector2f v)
+{
+	Point p;
+	p.x = v.x; p.y = v.y;
+	points.push_back(p);
+	count++;
 }

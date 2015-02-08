@@ -131,12 +131,5 @@ void Rocket::linterpFun(float* x, float* y)
 
 }
 
-void Rocket::savePoint(int x, int y)
-{
-	Point p;
-	p.x = x; p.y = y;
-	points.push_back(p);
-}
-
 
 
