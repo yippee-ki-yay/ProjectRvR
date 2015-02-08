@@ -29,7 +29,7 @@ private:
 	//Line su rectangle shape da bi mogli da imaju i width ako treba
 	sf::RectangleShape detectionLine;
 	sf::RectangleShape collisionLine;
-	std::vector<DetectedRocket> det_rockets;
+	std::vector<Rocket> det_rockets;
 };
 
 

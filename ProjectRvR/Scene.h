@@ -28,6 +28,9 @@ private:
 	RocketPath* testPath;
 	Rocket* r1;
 
+	sf::Clock clock;
+	sf::Text text;
+
 	bool pressed;
 };
 

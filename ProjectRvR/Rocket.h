@@ -24,6 +24,8 @@ class Rocket
 		float fun[3];				//funkcija po kojoj se rakete krecu
 		float x, y;				//koordinate rakete
 		void setFun(float c1, float c2, float c3);
+		struct Point{int x; int y;};
+		std::vector<Point> points;
 
 	public:
 
@@ -34,6 +36,11 @@ class Rocket
 
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}
+
+		void savePoint(int x, int y);
+		float getPointX(int i){return points[i].x;}
+		float getPointY(int i){return points[i].y;}
+		int numPoints(){return points.size();}
 
 		void reset(){x = 400; y = 0; active = false;}
 

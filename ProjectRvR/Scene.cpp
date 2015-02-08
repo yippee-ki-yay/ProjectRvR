@@ -8,7 +8,7 @@ Scene::Scene(int width, int height, std::string title)
 	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	event = new sf::Event;
 
-	window->setFramerateLimit(60);  //uvek da je 60fps moze da se promeni kasnije
+	window->setFramerateLimit(30);  //uvek da je 60fps moze da se promeni kasnije
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
 
@@ -72,4 +72,9 @@ void Scene::update()
 	//window->draw(r1.getShape());
 
 	window->display();
+
+	sf::Time t = clock.getElapsedTime();
+	//std::cout<<1.0f/t.asSeconds()<<std::endl;
+	clock.restart().asSeconds();
+
 }
