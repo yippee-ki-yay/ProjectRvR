@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include "RocketManager.h"
 #include "DetectedRocket.h"
+#include "util.h"
 #include <iostream>
 #include <vector>
 
@@ -35,6 +36,7 @@ private:
 	std::vector<Point> points;
 
 	void setPoint(sf::Vector2f v);
+	void setTarget();
 };
 
 

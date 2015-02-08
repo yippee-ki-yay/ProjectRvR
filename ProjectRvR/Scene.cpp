@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include "Rocket.h"
 #include <iostream>
-
+#include "util.h"
 
 Scene::Scene(int width, int height, std::string title)
 {
@@ -43,12 +43,14 @@ void Scene::update()
 				{
 					Rocket* r = manager.getRocket();
 					float x[3] = {400, 0, -400};
-					float y[3] = {300, -150, -300};
+					float y[3] = {-300, -150, -300};
 
 					x[1] = rand()%200 - 100;
-					y[1] = rand()%200 - 100;
+					y[1] = rand()%600 - 300;
 
-					r->linterpFun(x, y);
+
+					interpolation(x, y, r->getFun());
+					//r->linterpFun(x, y);
 					pressed = true;
 				}
 				

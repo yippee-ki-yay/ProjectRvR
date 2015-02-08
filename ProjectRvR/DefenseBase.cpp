@@ -68,6 +68,10 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 		if(count == 3)
 		{
 
+
+			Rocket *r = rockets.getRocket();
+			float *tmp;
+
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 			float x[3], y[3];
 			for(int j = 0; j < 3; ++j)
@@ -76,6 +80,9 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 				y[j] = points[j].y;
 				std::cout<<x[j]<<" "<<y[j]<<std::endl;
 			}
+
+			//interpolation(x, y, tmp);
+
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
@@ -94,4 +101,13 @@ void DefenseBase::setPoint(sf::Vector2f v)
 	p.x = v.x; p.y = v.y;
 	points.push_back(p);
 	count++;
+}
+
+void DefenseBase::setTarget()
+{
+	//uzmi odgavarajuci niz tacaka
+	//uradi interpolaciju
+	//dobijemo funkciju
+	//izracunamo funkciju u tacki 
+	//posaljemo raketu u toj tacki
 }

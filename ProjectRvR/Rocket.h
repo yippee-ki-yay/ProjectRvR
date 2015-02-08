@@ -2,6 +2,7 @@
 #define _ROCKET_H
 
 #include <SFML/Graphics.hpp>
+#include "util.h"
 
 /**
 	Napravi ovu klasu dodaj da ima te podatke,
@@ -29,8 +30,10 @@ class Rocket
 
 		Rocket();
 
-		float getX() { return x; }
+		float getX() { return x; }		//ne koristimo trenutno
 		float getY() { return y; }
+
+		float* getFun() { return fun; }
 
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}

@@ -1,55 +1,12 @@
+#ifndef _UTIL_H
+#define _UTIL_H
+
 #include <iostream>
-#include "Rocket.h"
 
-Rocket::Rocket()
-{
-	active = false;			//raketa nije aktivna prilikom stvaranja
-	x = 400;				//pocetna tacka(400, 0) kada se translira(800, 300)
-	y = 0;
-	for(int i = 0; i < 3; i++)
-	{
-		fun[0] = 0;
-	}
-	shape.setFillColor(sf::Color::Blue);
-	shape.setRadius(15);
-	shape.setPosition(-100, y);
-}
-
-void Rocket::move()		//pomeranje x-a i racunanje y-a
-{
-	shape.setPosition(x, y);
-	x -= 1;							
-	y = fun[0]*x*x + fun[1]*x + fun[2];
-
-	//y = x*x/1000;
-
-	shape.setPosition(x + 400, y + 300); //transliranje(centar(0, 0) je gornji levi ugao)
-
-	//std::cout << y << "\n";
-
-}
-
-void Rocket::setFun(float c1, float c2, float c3)
-{
-	fun[0] = c1;
-	fun[1] = c2;
-	fun[2] = c3;
-}
-
-sf::CircleShape Rocket::getShape()
-{
-	return shape;
-}
-
-void Rocket::setStatus(bool s)
-{
-	active = s;
-}
-
-void Rocket::linterpFun(float* x, float* y)	//NE KORISTI SE VISE
+void interpolation(float* x, float* y, float* fun)
 {
 
-	float a, b, c;
+float a, b, c;
 
 	float tmp[3][3];
 	float f[3];
@@ -125,11 +82,14 @@ void Rocket::linterpFun(float* x, float* y)	//NE KORISTI SE VISE
 	b = tmp[1][0]*f[0] + tmp[1][1]*f[1] + tmp[1][2]*f[2];
 	c = tmp[2][0]*f[0] + tmp[2][1]*f[1] + tmp[2][2]*f[2];
 
-	setFun(-a, -b, -c);				//ZASTO MINUS?
-
-	//std::cout << a << "\n" << b << "\n" << c;
+	fun[0] = -a;
+	fun[1] = -b;
+	fun[2] = -c;
 
 }
 
 
 
+
+
+#endif
