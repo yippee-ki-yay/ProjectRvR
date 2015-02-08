@@ -72,7 +72,7 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 			det_rockets.pop_back();
 			
 
-		}*/
+		}
 
 	}
 }
