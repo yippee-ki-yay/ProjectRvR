@@ -46,8 +46,6 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 		//pozicija tacaka je izabrana nasumicno, cisto da ima dovoljno udaljene tacke
 		//da precizno opise funkciju
 
-		//GRESKA: raketa mi ne vraca dobro svoje pozicije zasto?
-
 		if(det_rockets[i]->getShape().getPosition().x == 500)
 		{
 			setPoint(det_rockets[i]->getShape().getPosition());
