@@ -58,7 +58,7 @@ void Scene::update()
 	}
 
 	base.checkFirstWall(manager);
-
+	base.gatherPoints(manager);
 
 	window->clear();
 

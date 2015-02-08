@@ -19,37 +19,9 @@ public:
 
 	void draw(sf::RenderWindow* winodw);
 
-	void checkFirstWall(RocketManager rockets)								//TODO:			prebaciti u .cpp
-	{
-		if(rockets.hasRocketsAt(detectionLine.getPosition().x))
-		{
-			Rocket* r = rockets.getRocketAt((detectionLine.getPosition().x));
-			DetectedRocket dr(r);
-			det_rockets.push_back(dr);
-			std::cout << "Detected rocket" << std::endl;
-		}
-	}
+	void checkFirstWall(RocketManager rockets);	
 
-	void gatherPoints()
-	{
-
-		for(int i = 0; i < det_rockets.size(); i++)								//za svaku raketu, uzimamo sledecu tacku
-		{
-
-			int x = (*det_rockets[i].getRocket()).getShape().getPosition().x;			//uzmemo raketu i poziciju(x)
-			int y = (*det_rockets[i].getRocket()).getShape().getPosition().y;			//uzmemo raketu i poziciju(y)
-			det_rockets[i].setPoint(x, y, det_rockets[i].getCurrent());					//postavimo poziciju
-			det_rockets[i].moveToNextPoint();											//pomerimo pokazivac 
-
-			if(det_rockets[i].getCurrent() == 3)
-			{
-				//imamo tri tacke, treba da izbacimo tu raketu iz vektora i racunamo putanju odbrambene rakete
-			}
-
-		}
-
-	}
-
+	void gatherPoints(RocketManager rockets);
 
 
 private:

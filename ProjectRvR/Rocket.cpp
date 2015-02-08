@@ -54,7 +54,7 @@ void Rocket::linterpFun(float* x, float* y)
 	float tmp[3][3];
 	float f[3];
 
-	for(int i = 0; i < 3; i++)			// postavljanje vrednosti matrice na osnovu poznatih tacaka
+	for(int i = 0; i < 3; i++)		// postavljanje vrednosti matrice na osnovu poznatih tacaka
 	{
 		tmp[i][0] = x[i]*x[i];
 		tmp[i][1] = x[i];
