@@ -150,3 +150,11 @@ void Rocket::rotate()
 	std::cout << "alfa" << alpha << std::endl;
 	sprite.setRotation(alpha);
 }
+
+void Rocket::setImage(std::string name)
+{
+	if (texture.loadFromFile(name))
+	{
+		sprite.setTexture(texture);
+	}
+}

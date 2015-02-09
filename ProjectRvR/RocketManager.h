@@ -15,7 +15,9 @@ class RocketManager
 public:
 	RocketManager();
 
-	Rocket* getRocket();
+	enum Type{ATTACK, DEFENSE};
+
+	Rocket* getRocket(RocketManager::Type t);
 	void draw(sf::RenderWindow*);
 
 	bool hasRockets();
@@ -29,6 +31,7 @@ public:
 	Rocket* getRockets() { return rockets; }
 
 	sf::Texture* getTexture() { return &img; }
+
 
 private:
 	static const int MAX_ROCKETS = 60;  //max number of rockets on screen

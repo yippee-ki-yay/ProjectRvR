@@ -41,7 +41,7 @@ void Scene::update()
 			{
 				if(manager.hasRockets())
 				{
-					Rocket* r = manager.getRocket();
+					Rocket* r = manager.getRocket(RocketManager::ATTACK);
 					float x[3] = {400, 0, -400};
 					float y[3] = {-300, -150, -300};
 

@@ -2,10 +2,9 @@
 
 RocketManager::RocketManager()
 {
-	img.loadFromFile("rocket3.jpg");
 	for(int i = 0; i < MAX_ROCKETS; ++i)
 	{
-		rockets[i].setTexture((*this).getTexture());			//postavljanje slike na svaku raketu
+		//rockets[i].setTexture((*this).getTexture());			//postavljanje slike na svaku raketu
 		//rockets[i].getShape().setRadius(20);
 		//rockets[i].getShape().setFillColor(sf::Color::Red);
 		//rockets[i].getShape().setPosition(100+i*10, 100);
@@ -28,7 +27,7 @@ void RocketManager::draw(sf::RenderWindow* window)
 	}
 }
 
-Rocket* RocketManager::getRocket()
+Rocket* RocketManager::getRocket(RocketManager::Type t)
 {
 	//nadjes prvi koji je neaktivan i vratis ga nazad
 	//TODO: test kod za sada vraca samo prvu raketu
@@ -36,6 +35,11 @@ Rocket* RocketManager::getRocket()
 	{
 		if(rockets[i].getActive() == false)
 		{
+			if(t == RocketManager::ATTACK)
+				rockets[i].setImage("rocket.png");
+			else
+				rockets[i].setImage("rocket3.jpg");
+
 			rockets[i].setActive(true);
 			return &(rockets[i]);
 		}

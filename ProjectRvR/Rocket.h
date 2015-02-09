@@ -26,6 +26,7 @@ class Rocket
 		float x, y;				//koordinate rakete
 		int type;				//0 napad, 1 odbrana
 		sf::Sprite sprite;
+		sf::Texture texture;
 
 	public:
 
@@ -42,6 +43,8 @@ class Rocket
 		void setActive(bool ac){active = ac;}
 
 		void reset(){x = 400; y = 0; active = false;}
+
+		void setImage(std::string name);
 
 		void move();
 		sf::CircleShape getShape();
