@@ -23,8 +23,8 @@ public:
 private:
 	sf::RenderWindow* window;
 	sf::Event* event;
-	RocketManager manager;
 	DefenseBase base;
+	RocketManager manager;
 	RocketPath* testPath;
 	Rocket* r1;
 

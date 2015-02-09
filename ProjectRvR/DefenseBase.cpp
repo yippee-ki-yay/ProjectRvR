@@ -69,7 +69,6 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 		if(count == 3)
 		{
-
 			/*
 			Rocket *r = rockets->getRocket();
 			float tmp[3];
@@ -84,7 +83,6 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 			}
 
 			interpolation(x, y, tmp);
-
 			//tmp = r->getFun();
 
 			float startX = -400;
@@ -108,6 +106,8 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 			r->setX(-400);
 			r->setY(300);
 			*/
+
+			count++;
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom

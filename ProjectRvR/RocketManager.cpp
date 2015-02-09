@@ -23,6 +23,7 @@ void RocketManager::draw(sf::RenderWindow* window)
 			window->draw(rockets[i].getShape());
 			window->draw(rockets[i].getSprite());
 			rockets[i].move();
+
 		}
 	}
 }
@@ -36,7 +37,6 @@ Rocket* RocketManager::getRocket()
 		if(rockets[i].getActive() == false)
 		{
 			rockets[i].setActive(true);
-			std::cout << "raketa " << i << "je aktivna\n";
 			return &(rockets[i]);
 		}
 	}
