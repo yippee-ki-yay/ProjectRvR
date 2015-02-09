@@ -27,17 +27,17 @@ void DefenseBase::draw(sf::RenderWindow* window)
 	window->draw(collisionLine);
 }
 
-void DefenseBase::checkFirstWall(RocketManager rockets)
+void DefenseBase::checkFirstWall(RocketManager* rockets)
 {
-	if(rockets.hasRocketsAt(detectionLine.getPosition().x))
+	if(rockets->hasRocketsAt(detectionLine.getPosition().x))
 	{
-		Rocket* r = rockets.getRocketAt((detectionLine.getPosition().x));
+		Rocket* r = rockets->getRocketAt((detectionLine.getPosition().x));
 		det_rockets.push_back(r);
 		std::cout << "Detected rocket" << std::endl;
 	}
 }
 
-void DefenseBase::gatherPoints(RocketManager rockets)
+void DefenseBase::gatherPoints(RocketManager* rockets)
 {
 	for(unsigned int i = 0; i < det_rockets.size(); i++)
 	{
@@ -68,10 +68,6 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 		if(count == 3)
 		{
 
-
-			Rocket *r = rockets.getRocket();
-			//float *tmp;
-
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 			float x[3], y[3];
 			for(int j = 0; j < 3; ++j)
@@ -83,13 +79,15 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 
 			//interpolation(x, y, tmp);
 
-			r->setActive(true);
+			//r->setActive(true);
+		
+	        Rocket *r = rockets->getRocket();
 			r->setFun(0, 1, 0);
+			r->setType(1);
 			r->setX(0);
 			r->setY(0);
-			r->getShape().setPosition(200, 200);
 
-			std::cout << r->getShape().getPosition().x << "x\n" << r->getShape().getPosition().y << "y\n";
+			count++;
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom

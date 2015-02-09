@@ -20,9 +20,9 @@ public:
 
 	void draw(sf::RenderWindow* winodw);
 
-	void checkFirstWall(RocketManager rockets);	
+	void checkFirstWall(RocketManager* rockets);	
 
-	void gatherPoints(RocketManager rockets);
+	void gatherPoints(RocketManager* rockets);
 
 
 private:

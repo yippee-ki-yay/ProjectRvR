@@ -19,7 +19,7 @@ Rocket::Rocket()
 void Rocket::move()		//pomeranje x-a i racunanje y-a
 {
 	//shape.setPosition(x, y);
-	
+
 	if(type == 0)
 		x -= 10;							
 	else
@@ -30,8 +30,6 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	//y = x*x/1000;
 
 	shape.setPosition(x + 400, y + 300); //transliranje(centar(0, 0) je gornji levi ugao)
-
-	//std::cout << y << "\n";
 
 }
 
