@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "util.h"
-
+#include "math.h"
 /**
 	Napravi ovu klasu dodaj da ima te podatke,
 	mogucnost da menja izgled u zavisnosti koj tip rakete je,
@@ -25,12 +25,13 @@ class Rocket
 		float fun[3];				//funkcija po kojoj se rakete krecu
 		float x, y;				//koordinate rakete
 		int type;				//0 napad, 1 odbrana
+		sf::Sprite sprite;
 
 	public:
 
 		Rocket();
 
-		float getX() { return x; }		//ne koristimo trenutno
+		float getX() { return x; }		
 		float getY() { return y; }
 
 		float* getFun() { return fun; }
@@ -47,10 +48,16 @@ class Rocket
 		void setStatus(bool s);
 		void linterpFun(float *x, float* y);
 
+		sf::Sprite getSprite() { return sprite; }
+
 		void setFun(float c1, float c2, float c3);
 
 		void setX(float xx) { x = xx; }
 		void setY(float yy) { y = yy; }
+		int getType() { return type; }
+
+		void setTexture(sf::Texture*);
+		void rotate();
 
 };
 

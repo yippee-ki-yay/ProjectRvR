@@ -2,13 +2,14 @@
 
 RocketManager::RocketManager()
 {
-	/*for(int i = 0; i < MAX_ROCKETS; ++i)
+	img.loadFromFile("rocket3.jpg");
+	for(int i = 0; i < MAX_ROCKETS; ++i)
 	{
-		rockets[i].getShape().setRadius(20);
-		rockets[i].getShape().setFillColor(sf::Color::Red);
-		rockets[i].getShape().setPosition(100+i*10, 100);
-	}*/
-
+		rockets[i].setTexture((*this).getTexture());			//postavljanje slike na svaku raketu
+		//rockets[i].getShape().setRadius(20);
+		//rockets[i].getShape().setFillColor(sf::Color::Red);
+		//rockets[i].getShape().setPosition(100+i*10, 100);
+	}
 	outOfRockets = false;
 }
 
@@ -20,6 +21,7 @@ void RocketManager::draw(sf::RenderWindow* window)
 		if(rockets[i].getActive() == true)
 		{
 			window->draw(rockets[i].getShape());
+			window->draw(rockets[i].getSprite());
 			rockets[i].move();
 		}
 	}

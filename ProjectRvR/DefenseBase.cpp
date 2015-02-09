@@ -27,17 +27,17 @@ void DefenseBase::draw(sf::RenderWindow* window)
 	window->draw(collisionLine);
 }
 
-void DefenseBase::checkFirstWall(RocketManager rockets)
+void DefenseBase::checkFirstWall(RocketManager* rockets)
 {
-	if(rockets.hasRocketsAt(detectionLine.getPosition().x))
+	if(rockets->hasRocketsAt(detectionLine.getPosition().x))
 	{
-		Rocket* r = rockets.getRocketAt((detectionLine.getPosition().x));
+		Rocket* r = rockets->getRocketAt((detectionLine.getPosition().x));
 		det_rockets.push_back(r);
 		std::cout << "Detected rocket" << std::endl;
 	}
 }
 
-void DefenseBase::gatherPoints(RocketManager rockets)
+void DefenseBase::gatherPoints(RocketManager* rockets)
 {
 	for(unsigned int i = 0; i < det_rockets.size(); i++)
 	{
@@ -46,6 +46,8 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 		//pozicija tacaka je izabrana nasumicno, cisto da ima dovoljno udaljene tacke
 		//da precizno opise funkciju
 
+		if(det_rockets[i]->getType() == 0)
+		{
 		if(det_rockets[i]->getShape().getPosition().x == 500)
 		{
 			setPoint(det_rockets[i]->getShape().getPosition());
@@ -68,9 +70,9 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 		if(count == 3)
 		{
 
-
-			Rocket *r = rockets.getRocket();
-			//float *tmp;
+			/*
+			Rocket *r = rockets->getRocket();
+			float tmp[3];
 
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 			float x[3], y[3];
@@ -81,15 +83,31 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 				std::cout<<x[j]<<" "<<y[j]<<std::endl;
 			}
 
-			//interpolation(x, y, tmp);
+			interpolation(x, y, tmp);
 
+			//tmp = r->getFun();
+
+			float startX = -400;
+			float startY = 300;
+			float targetX = -400 + collisionLine.getPosition().x;
+			float targetY = tmp[0]*targetX*targetX + tmp[1]*targetX + tmp[2];
+			float midX = (startX + targetX)/2;
+			float midY = (startY + targetY)/2;
+
+			float x1[3];
+			float y1[3];
+
+			x1[0] = startX; x1[1] = midX; x1[2] = targetX;
+			y1[0] = startY; y1[1] = midY; y1[2] = targetY;
+			std::cout << startX << " " << midX << " " << targetX << std::endl;
+			std::cout << startY << " " << midY << " " << targetY << std::endl;
+			interpolation(x1, y1, r->getFun());
 			r->setActive(true);
-			r->setFun(0, 1, 0);
-			r->setX(0);
-			r->setY(0);
-			r->getShape().setPosition(200, 200);
-
-			std::cout << r->getShape().getPosition().x << "x\n" << r->getShape().getPosition().y << "y\n";
+			r->setType(1);
+			//r->setFun(0, -0.5, 0);
+			r->setX(-400);
+			r->setY(300);
+			*/
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
@@ -97,6 +115,7 @@ void DefenseBase::gatherPoints(RocketManager rockets)
 			points.clear();
 			
 			count = 0;
+		}
 		}
 
 	}

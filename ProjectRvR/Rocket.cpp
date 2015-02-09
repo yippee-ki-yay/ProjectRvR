@@ -14,6 +14,7 @@ Rocket::Rocket()
 	shape.setRadius(15);
 	shape.setPosition(-100, y);
 	type = 0;
+	//sprite.setTexture(*txt);
 }
 
 void Rocket::move()		//pomeranje x-a i racunanje y-a
@@ -27,10 +28,9 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	
 	y = fun[0]*x*x + fun[1]*x + fun[2];
 
-	//y = x*x/1000;
-
+	rotate();
 	shape.setPosition(x + 400, y + 300); //transliranje(centar(0, 0) je gornji levi ugao)
-
+	sprite.setPosition(x + 400, y + 300);
 	//std::cout << y << "\n";
 
 }
@@ -137,5 +137,17 @@ void Rocket::linterpFun(float* x, float* y)	//NE KORISTI SE VISE
 
 }
 
+void Rocket::setTexture(sf::Texture* txt)
+{
+	sprite.setTexture(*txt);
+}
 
-
+void Rocket::rotate()
+{
+	float alpha;
+	alpha = atan(fun[0]*x + fun[1]);					//arctg prvog izvoda funkcije u datoj tacki = ugao tangente
+	
+	alpha = alpha*180/3.14;
+	std::cout << "alfa" << alpha << std::endl;
+	sprite.setRotation(alpha);
+}

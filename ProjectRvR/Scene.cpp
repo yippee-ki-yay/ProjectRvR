@@ -59,8 +59,8 @@ void Scene::update()
   
 	}
 
-	base.checkFirstWall(manager);
-	base.gatherPoints(manager);
+	base.checkFirstWall(&manager);
+	base.gatherPoints(&manager);
 
 	window->clear();
 
@@ -69,7 +69,6 @@ void Scene::update()
 	base.draw(window);
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
-
 
 	//window->draw(r1.getShape());
 

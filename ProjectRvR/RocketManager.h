@@ -28,10 +28,13 @@ public:
 
 	Rocket* getRockets() { return rockets; }
 
+	sf::Texture* getTexture() { return &img; }
+
 private:
 	static const int MAX_ROCKETS = 60;  //max number of rockets on screen
 	Rocket rockets[MAX_ROCKETS]; 
 	bool outOfRockets;
+	sf::Texture img;
 };
 
 
