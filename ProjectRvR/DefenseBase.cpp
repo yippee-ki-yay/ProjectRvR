@@ -32,7 +32,7 @@ void DefenseBase::checkFirstWall(RocketManager* rockets)
 	{
 		Rocket* r = rockets->getRocketAt((detectionLine.getPosition().x));
 		det_rockets.push_back(r);
-		std::cout << "Detected rocket" << std::endl;
+		//std::cout << "Detected rocket" << std::endl;
 	}
 }
 
@@ -47,72 +47,70 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 		if(det_rockets[i]->getType() == 0)
 		{
-		if(det_rockets[i]->getShape().getPosition().x == 500)
-		{
-			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
-			std::cout<<"Dodao\n";
-		}
-
-		if(det_rockets[i]->getShape().getPosition().x == 400)
-		{
-			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
-			std::cout<<"Dodao\n";
-		}
-			
-
-		if(det_rockets[i]->getShape().getPosition().x == 300)
-		{
-			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
-			std::cout<<"Dodao\n";
-		}
-
-		if(det_rockets[i]->getCount() == 3)
-		{
-			
-			Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
-			float tmp[3];
-
-			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
-			float x[3], y[3];
-			for(int j = 0; j < 3; ++j)
+			if(det_rockets[i]->getShape().getPosition().x == 500)
 			{
-				x[j] = det_rockets[i]->points[j].x;
-				y[j] = det_rockets[i]->points[j].y;
-			//	std::cout<<x[j]<<" "<<y[j]<<std::endl;
+				det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
+				//std::cout<<"Dodao\n";
 			}
 
-			std::cout<<"Odbrana raketa..bum"<<std::endl;
+			if(det_rockets[i]->getShape().getPosition().x == 400)
+			{
+				det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
+				//std::cout<<"Dodao\n";
+			}
+			
 
-			interpolation(x, y, tmp);
-			//tmp = r->getFun();
+			if(det_rockets[i]->getShape().getPosition().x == 300)  
+			{
+				det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
+				//std::cout<<"Dodao\n";
+			}
 
-			float startX = -400;
-			float startY = 300;
-			float targetX = -400 + collisionLine.getPosition().x;
-			float targetY = tmp[0]*targetX*targetX + tmp[1]*targetX + tmp[2];
-			float midX = (startX + targetX)/2;
-			float midY = (startY + targetY)/2;
+			if(det_rockets[i]->getCount() == 3)
+			{
+			
+				Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
+				float tmp[3];		//funkcija napadacke rakete
 
-			float x1[3];
-			float y1[3];
+				//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
+				float x[3], y[3];
+				for(int j = 0; j < 3; ++j)
+				{
+					x[j] = det_rockets[i]->points[j].x - 400;	//transliramo u nas koordinatni sistem za racunanje pozicije
+					y[j] = det_rockets[i]->points[j].y - 300;	//PONETI PAPIR SA KOORDINATNIM SISTEMOM
+					std::cout<<x[j]<<" "<<y[j]<<std::endl;
+				}
 
-			x1[0] = startX; x1[1] = midX; x1[2] = targetX;
-			y1[0] = startY; y1[1] = midY; y1[2] = targetY;
-			//std::cout << startX << " " << midX << " " << targetX << std::endl;
-			//std::cout << startY << " " << midY << " " << targetY << std::endl;
-			//interpolation(x1, y1, r->getFun());
-			//r->setActive(true);
-			r->setType(1);
-			r->setFun(0, -0.5, 0);
-			r->setX(-400);
-			r->setY(300);
+				std::cout<<"Odbrana raketa..bum"<<std::endl;
+
+				interpolation(x, y, tmp);		//sacuvamo putanju detektovane rakete u tmp
+
+				float startX = -400;			//raketa krece iz tacke(-400, -300)
+				float startY = -300;
+				float targetX = -400 + collisionLine.getPosition().x;	//pozicija prave na kojoj gadjamo
+				float targetY = tmp[0]*targetX*targetX + tmp[1]*targetX + tmp[2];//vrednost putanje detektovane rakete u toj tacki
+				float midX = (startX + targetX)/2;	//damo tacku izmedju, da se krece po linearnoj funkciji
+				float midY = (startY + targetY)/2;
+
+				float x1[3];
+				float y1[3];
+
+				x1[0] = startX; x1[1] = midX; x1[2] = targetX;	//postavimo vrednosti za interpolaciju
+				y1[0] = startY; y1[1] = midY; y1[2] = targetY;	
+				//std::cout << startX << " " << midX << " " << targetX << std::endl;
+				//std::cout << startY << " " << midY << " " << targetY << std::endl;
+				interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
+				r->setType(1);
+				//r->setFun(0, -0.5, 0);
+				r->setX(-400);	//postavljanje zbog crtanja
+				r->setY(-300);
 			
 
 
-			//na osnovu ovih tacaka treba da se uradi interpolacija
-			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
-			det_rockets.pop_back();
-		}
+				//na osnovu ovih tacaka treba da se uradi interpolacija
+				//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
+				det_rockets.pop_back();
+			}
 		}
 
 	}
