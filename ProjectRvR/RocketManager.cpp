@@ -35,10 +35,10 @@ Rocket* RocketManager::getRocket(RocketManager::Type t)
 	{
 		if(rockets[i].getActive() == false)
 		{
-			if(t == RocketManager::ATTACK)
+			//if(t == RocketManager::ATTACK)
 				rockets[i].setImage("rocket.png");
-			else
-				rockets[i].setImage("rocket3.jpg");
+			//else
+			//	rockets[i].setImage("rocket3.jpg");
 
 			rockets[i].setActive(true);
 			return &(rockets[i]);
@@ -79,7 +79,7 @@ bool RocketManager::hasRocketsAt(float x)
 {
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{
-		if(rockets[i].getShape().getPosition().x == x)
+		if(rockets[i].getShape().getPosition().x == x && (rockets[i].getType() == 0))
 			return true;
 	}
 

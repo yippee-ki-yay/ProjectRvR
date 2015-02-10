@@ -16,7 +16,6 @@ DefenseBase::DefenseBase()
 	collisionLine.setRotation(90);
 	collisionLine.setFillColor(sf::Color::White);
 
-	count = 0;
 }
 
 
@@ -50,24 +49,24 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 		{
 		if(det_rockets[i]->getShape().getPosition().x == 500)
 		{
-			setPoint(det_rockets[i]->getShape().getPosition());
+			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
 			std::cout<<"Dodao\n";
 		}
 
 		if(det_rockets[i]->getShape().getPosition().x == 400)
 		{
-			setPoint(det_rockets[i]->getShape().getPosition());
+			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
 			std::cout<<"Dodao\n";
 		}
 			
 
 		if(det_rockets[i]->getShape().getPosition().x == 300)
 		{
-			setPoint(det_rockets[i]->getShape().getPosition());
+			det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
 			std::cout<<"Dodao\n";
 		}
 
-		if(count == 3)
+		if(det_rockets[i]->getCount() == 3)
 		{
 			
 			Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
@@ -77,10 +76,12 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 			float x[3], y[3];
 			for(int j = 0; j < 3; ++j)
 			{
-				x[j] = points[j].x;
-				y[j] = points[j].y;
-				std::cout<<x[j]<<" "<<y[j]<<std::endl;
+				x[j] = det_rockets[i]->points[j].x;
+				y[j] = det_rockets[i]->points[j].y;
+			//	std::cout<<x[j]<<" "<<y[j]<<std::endl;
 			}
+
+			std::cout<<"Odbrana raketa..bum"<<std::endl;
 
 			interpolation(x, y, tmp);
 			//tmp = r->getFun();
@@ -97,8 +98,8 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 			x1[0] = startX; x1[1] = midX; x1[2] = targetX;
 			y1[0] = startY; y1[1] = midY; y1[2] = targetY;
-			std::cout << startX << " " << midX << " " << targetX << std::endl;
-			std::cout << startY << " " << midY << " " << targetY << std::endl;
+			//std::cout << startX << " " << midX << " " << targetX << std::endl;
+			//std::cout << startY << " " << midY << " " << targetY << std::endl;
 			//interpolation(x1, y1, r->getFun());
 			//r->setActive(true);
 			r->setType(1);
@@ -107,26 +108,14 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 			r->setY(300);
 			
 
-			count++;
 
 			//na osnovu ovih tacaka treba da se uradi interpolacija
 			//i da se dobije funkcija, pa mozemo da nadjemo gde se sece sa pravom
 			det_rockets.pop_back();
-			points.clear();
-			
-			count = 0;
 		}
 		}
 
 	}
-}
-
-void DefenseBase::setPoint(sf::Vector2f v)
-{
-	Point p;
-	p.x = v.x; p.y = v.y;
-	points.push_back(p);
-	count++;
 }
 
 void DefenseBase::setTarget()

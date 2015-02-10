@@ -27,6 +27,7 @@ class Rocket
 		int type;				//0 napad, 1 odbrana
 		sf::Sprite sprite;
 		sf::Texture texture;
+		struct Point{int x; int y;};
 
 	public:
 
@@ -42,9 +43,13 @@ class Rocket
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}
 
-		void reset(){x = 400; y = 0; active = false;}
+		void reset();
 
 		void setImage(std::string name);
+
+		std::vector<Point> points;
+		void setPoint(sf::Vector2f v);
+		int getCount(){return points.size();}
 
 		void move();
 		sf::CircleShape getShape();

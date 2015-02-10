@@ -9,6 +9,7 @@ Scene::Scene(int width, int height, std::string title)
 	event = new sf::Event;
 
 	window->setFramerateLimit(30);  //uvek da je 60fps moze da se promeni kasnije
+	window->setKeyRepeatEnabled(false);
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
 
@@ -48,8 +49,13 @@ void Scene::update()
 					x[1] = rand()%200 - 100;
 					y[1] = rand()%600 - 300;
 
+					std::cout<<"Pocetna X: "<<r->getShape().getPosition().x<<"  Pocetna Y: "<<
+						 r->getShape().getPosition().y<<std::endl;
 
 					interpolation(x, y, r->getFun());
+
+					std::cout<<"Interpol X: "<<x<<"  Interpol Y: "<<
+						 y<<std::endl;
 					//r->linterpFun(x, y);
 					pressed = true;
 				}

@@ -147,7 +147,7 @@ void Rocket::rotate()
 	alpha = atan(fun[0]*x + fun[1]);					//arctg prvog izvoda funkcije u datoj tacki = ugao tangente
 	
 	alpha = alpha*180/3.14;
-	std::cout << "alfa" << alpha << std::endl;
+	//std::cout << "alfa" << alpha << std::endl;
 	sprite.setRotation(alpha);
 }
 
@@ -157,4 +157,27 @@ void Rocket::setImage(std::string name)
 	{
 		sprite.setTexture(texture);
 	}
+}
+
+void Rocket::setPoint(sf::Vector2f v)
+{
+	Point p;
+	p.x = v.x; p.y = v.y;
+	points.push_back(p);
+}
+
+void Rocket::reset()
+{
+	active = false;			//raketa nije aktivna prilikom stvaranja
+	x = 400;				//pocetna tacka(400, 0) kada se translira(800, 300)
+	y = 0;
+	for(int i = 0; i < 3; i++)
+	{
+		fun[0] = 0;
+	}
+	shape.setFillColor(sf::Color::Blue);
+	shape.setRadius(15);
+	shape.setPosition(-100, y);
+	type = 0;
+	points.clear();
 }
