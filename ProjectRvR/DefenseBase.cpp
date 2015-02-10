@@ -69,8 +69,8 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 		if(count == 3)
 		{
-			/*
-			Rocket *r = rockets->getRocket();
+			
+			Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
 			float tmp[3];
 
 			//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
@@ -99,13 +99,13 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 			y1[0] = startY; y1[1] = midY; y1[2] = targetY;
 			std::cout << startX << " " << midX << " " << targetX << std::endl;
 			std::cout << startY << " " << midY << " " << targetY << std::endl;
-			interpolation(x1, y1, r->getFun());
-			r->setActive(true);
+			//interpolation(x1, y1, r->getFun());
+			//r->setActive(true);
 			r->setType(1);
-			//r->setFun(0, -0.5, 0);
+			r->setFun(0, -0.5, 0);
 			r->setX(-400);
 			r->setY(300);
-			*/
+			
 
 			count++;
 
