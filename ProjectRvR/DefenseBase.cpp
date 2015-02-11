@@ -100,9 +100,9 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 				//std::cout << startX << " " << midX << " " << targetX << std::endl;
 				//std::cout << startY << " " << midY << " " << targetY << std::endl;
 				interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
-				r->setType(1);
+				//r->setType(1);
 				//r->setFun(0, -0.5, 0);
-				r->setX(-400);	//postavljanje zbog crtanja
+				r->setX(-400);	//postavljanje zbog crtanja, krece iz baze
 				r->setY(-300);
 			
 

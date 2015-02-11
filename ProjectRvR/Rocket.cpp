@@ -147,6 +147,10 @@ void Rocket::rotate()
 	alpha = atan(fun[0]*x + fun[1]);					//arctg prvog izvoda funkcije u datoj tacki = ugao tangente
 	
 	alpha = alpha*180/3.14;
+
+	if(type == 1)
+		alpha = 180 + alpha;
+
 	//std::cout << "alfa" << alpha << std::endl;
 	sprite.setRotation(alpha);
 }
