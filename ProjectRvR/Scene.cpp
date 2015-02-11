@@ -14,8 +14,6 @@ Scene::Scene(int width, int height, std::string title)
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
 
 	srand(time(NULL));
-
-	pressed = false;
 }
 
 Scene::~Scene()
@@ -51,6 +49,8 @@ void Scene::update()
 
 					interpolation(x, y, r->getFun());
 
+					e.start();
+
 				}
 				
 			}
@@ -68,6 +68,8 @@ void Scene::update()
 	base.draw(window);
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
+
+	e.draw(window);
 
 	//window->draw(r1.getShape());
 

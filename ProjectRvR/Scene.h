@@ -8,6 +8,7 @@
 #include "RocketPath.h"
 #include "Rocket.h"
 #include "DefenseBase.h"
+#include "Explosion.h"
 
 class Scene
 {
@@ -27,11 +28,11 @@ private:
 	RocketManager manager;
 	RocketPath* testPath;
 	Rocket* r1;
+	Explosion e;
 
 	sf::Clock clock;
 	sf::Text text;
 
-	bool pressed;
 };
 
 

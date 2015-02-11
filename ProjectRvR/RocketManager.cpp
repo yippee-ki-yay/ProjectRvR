@@ -35,10 +35,10 @@ Rocket* RocketManager::getRocket(RocketManager::Type t)
 	{
 		if(rockets[i].getActive() == false)
 		{
-			//if(t == RocketManager::ATTACK)
-				rockets[i].setImage("rocket.png");
-			//else
-			//	rockets[i].setImage("rocket3.jpg");
+			if(t == RocketManager::ATTACK)
+				rockets[i].setImage("r.png");
+			else
+				rockets[i].setImage("odbrana.png");
 
 			rockets[i].setActive(true);
 			return &(rockets[i]);
