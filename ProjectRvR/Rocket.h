@@ -21,7 +21,7 @@ class Rocket
 	private:
 	
 		bool active;
-		sf::CircleShape shape;
+		sf::RectangleShape shape;
 		float fun[3];				//funkcija po kojoj se rakete krecu
 		float x, y;				//koordinate rakete
 		int type;				//0 napad, 1 odbrana
@@ -35,15 +35,19 @@ class Rocket
 
 		float getX() { return x; }		
 		float getY() { return y; }
+		void setX(float xx) { x = xx; }
+		void setY(float yy) { y = yy; }
 
 		float* getFun() { return fun; }
-
-		void setType(int t) { type = t; }
+		void setFun(float c1, float c2, float c3);
 
 		bool getActive(){return active;}
 		void setActive(bool ac){active = ac;}
 
-		void reset();
+		int getType() { return type; }
+		void setType(int t) { type = t; }
+
+		sf::RectangleShape getShape();
 
 		void setImage(std::string name);
 
@@ -52,20 +56,14 @@ class Rocket
 		int getCount(){return points.size();}
 
 		void move();
-		sf::CircleShape getShape();
+		void rotate();
+		void reset();
+
 		void setStatus(bool s);
-		void linterpFun(float *x, float* y);
 
 		sf::Sprite getSprite() { return sprite; }
 
-		void setFun(float c1, float c2, float c3);
-
-		void setX(float xx) { x = xx; }
-		void setY(float yy) { y = yy; }
-		int getType() { return type; }
-
 		void setTexture(sf::Texture*);
-		void rotate();
 
 };
 

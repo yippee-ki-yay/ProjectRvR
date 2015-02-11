@@ -32,7 +32,7 @@ private:
 	sf::RectangleShape collisionLine;
 	std::vector<Rocket*> det_rockets;
 
-	void setTarget();
+	void setTarget(RocketManager* rockets, int i);
 };
 
 

@@ -68,6 +68,7 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 			if(det_rockets[i]->getCount() == 3)
 			{
+				/*
 				Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
 				float tmp[3];		//funkcija napadacke rakete
 
@@ -93,13 +94,15 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 				x1[0] = startX; x1[1] = midX; x1[2] = targetX;	//postavimo vrednosti za interpolaciju
 				y1[0] = startY; y1[1] = midY; y1[2] = targetY;	
-				//std::cout << startX << " " << midX << " " << targetX << std::endl;
-				//std::cout << startY << " " << midY << " " << targetY << std::endl;
+
 				interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
 				//r->setType(1);
-				//r->setFun(0, -0.5, 0);
+
 				r->setX(-400);	//postavljanje zbog crtanja, krece iz baze
 				r->setY(-300);
+				*/
+
+				setTarget(rockets, i);
 			
 				//izbacimo detektovanu raketu iz liste
 				det_rockets.erase(det_rockets.begin()+i);
@@ -111,11 +114,44 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 	
 }
 
-void DefenseBase::setTarget()
+void DefenseBase::setTarget(RocketManager* rockets, int i)
 {
 	//uzmi odgavarajuci niz tacaka
 	//uradi interpolaciju
 	//dobijemo funkciju
 	//izracunamo funkciju u tacki 
 	//posaljemo raketu u toj tacki
+
+		Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
+		float tmp[3];		//funkcija napadacke rakete
+
+		//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
+		float x[3], y[3];
+		for(int j = 0; j < 3; ++j)
+		{
+			x[j] = det_rockets[i]->points[j].x - 400;	//transliramo u nas koordinatni sistem za racunanje pozicije
+			y[j] = det_rockets[i]->points[j].y - 300;	//PONETI PAPIR SA KOORDINATNIM SISTEMOM
+		}
+
+		interpolation(x, y, tmp);		//sacuvamo putanju detektovane rakete u tmp
+
+		float startX = -400;			//raketa krece iz tacke(-400, -300)
+		float startY = -300;
+		float targetX = -400 + collisionLine.getPosition().x;	//pozicija prave na kojoj gadjamo
+		float targetY = tmp[0]*targetX*targetX + tmp[1]*targetX + tmp[2];//vrednost putanje detektovane rakete u toj tacki
+		float midX = (startX + targetX)/2;	//damo tacku izmedju, da se krece po linearnoj funkciji
+		float midY = (startY + targetY)/2;
+
+		float x1[3];
+		float y1[3];
+
+		x1[0] = startX; x1[1] = midX; x1[2] = targetX;	//postavimo vrednosti za interpolaciju
+		y1[0] = startY; y1[1] = midY; y1[2] = targetY;	
+
+		interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
+		//r->setType(1);
+
+		r->setX(-400);	//postavljanje zbog crtanja, krece iz baze
+		r->setY(-300);
+
 }
