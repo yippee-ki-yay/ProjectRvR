@@ -41,6 +41,8 @@ Rocket* RocketManager::getRocket(RocketManager::Type t)
 				rockets[i].setImage("odbrana.png");
 
 			rockets[i].setActive(true);
+				rockets[i].setType(t);
+				rockets[i].setActive(true);
 			return &(rockets[i]);
 		}
 	}
