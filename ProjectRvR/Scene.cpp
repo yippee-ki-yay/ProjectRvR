@@ -49,15 +49,8 @@ void Scene::update()
 					x[1] = rand()%200 - 100;
 					y[1] = rand()%600 - 300;
 
-					std::cout<<"Pocetna X: "<<r->getShape().getPosition().x<<"  Pocetna Y: "<<
-						 r->getShape().getPosition().y<<std::endl;
-
 					interpolation(x, y, r->getFun());
 
-					std::cout<<"Interpol X: "<<x<<"  Interpol Y: "<<
-						 y<<std::endl;
-					//r->linterpFun(x, y);
-					pressed = true;
 				}
 				
 			}
