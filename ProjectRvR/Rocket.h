@@ -31,6 +31,8 @@ class Rocket
 
 	public:
 
+		double ugao;
+
 		Rocket();
 
 		float getX() { return x; }		

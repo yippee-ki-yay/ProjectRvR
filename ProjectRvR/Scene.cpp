@@ -8,12 +8,27 @@ Scene::Scene(int width, int height, std::string title)
 	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	event = new sf::Event;
 
-	window->setFramerateLimit(30);  //uvek da je 60fps moze da se promeni kasnije
+	window->setFramerateLimit(50);  //uvek da je 60fps moze da se promeni kasnije
 	window->setKeyRepeatEnabled(false);
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
 
 	srand(time(NULL));
+
+	teksture.loadFromFile("rocket3.jpg");
+
+	prvi.setTexture(teksture);
+	drugi.setTexture(teksture);
+
+	prvi.setPosition(100, 100);
+
+	drugi.setPosition(400, 100);
+
+	prvi.setRotation(-90);
+	drugi.setRotation(-90);
+
+	rot = 0;
+
 }
 
 Scene::~Scene()
@@ -71,12 +86,33 @@ void Scene::update()
 
 	e.draw(window);
 
-	//window->draw(r1.getShape());
+	window->draw(prvi);
+	window->draw(drugi);
+
+	prvi.setPosition(prvi.getPosition().x+5, prvi.getPosition().y);
+
+	if(manager.collision(prvi, drugi)){
+	prvi.setPosition(100, 100);
+
+		prvi.setRotation(rot);
+	drugi.setRotation(rot);
+
+	rot += 20;
+
+	drugi.setPosition(400, 100);}
+
+	if(prvi.getPosition().x > 500)
+	{
+		prvi.setPosition(100, 100);
+				prvi.setRotation(rot);
+	drugi.setRotation(rot);
+
+	rot += 20;
+	}
 
 	window->display();
 
 	sf::Time t = clock.getElapsedTime();
-	//std::cout<<1.0f/t.asSeconds()<<std::endl;
 	clock.restart().asSeconds();
 
 }

@@ -30,8 +30,13 @@ private:
 	Rocket* r1;
 	Explosion e;
 
+	sf::Texture teksture;
+	sf::Sprite prvi;
+	sf::Sprite drugi;
+
+	int rot;
+
 	sf::Clock clock;
-	sf::Text text;
 
 };
 

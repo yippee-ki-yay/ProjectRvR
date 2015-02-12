@@ -18,6 +18,7 @@ Rocket::Rocket()
 	shape.setPosition(-100, y);
 	type = 0;
 	//sprite.setTexture(*txt);
+	ugao = 0;
 }
 
 void Rocket::move()		//pomeranje x-a i racunanje y-a
@@ -70,7 +71,9 @@ void Rocket::rotate()
 		alpha = 180 + alpha;
 
 	//std::cout << "alfa" << alpha << std::endl;
+	ugao = alpha;
 	sprite.setRotation(alpha);
+	sprite.getTransform();
 }
 
 void Rocket::setImage(std::string name)
