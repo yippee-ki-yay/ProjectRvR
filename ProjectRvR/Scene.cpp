@@ -8,7 +8,7 @@ Scene::Scene(int width, int height, std::string title)
 	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	event = new sf::Event;
 
-	window->setFramerateLimit(50);  //uvek da je 60fps moze da se promeni kasnije
+	window->setFramerateLimit(30);  //uvek da je 30fps moze da se promeni kasnije
 	window->setKeyRepeatEnabled(false);
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
@@ -64,7 +64,6 @@ void Scene::update()
 
 					interpolation(x, y, r->getFun());
 
-					e.start();
 				}
 				
 			}
@@ -80,36 +79,11 @@ void Scene::update()
 	/** TEST DEO KODA OKO KRETANJA */
 
 	base.draw(window);
+
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
-	manager.checkCollision();
+	manager.checkCollision(window);
 
-	e.draw(window);
-
-	//window->draw(prvi);
-	//window->draw(drugi);
-	/*
-	prvi.setPosition(prvi.getPosition().x+5, prvi.getPosition().y);
-
-	if(manager.collision(prvi, drugi)){
-	prvi.setPosition(100, 100);
-
-		prvi.setRotation(rot);
-	drugi.setRotation(rot);
-
-	rot += 20;
-
-	drugi.setPosition(400, 100);}
-
-	if(prvi.getPosition().x > 500)
-	{
-		prvi.setPosition(100, 100);
-				prvi.setRotation(rot);
-	drugi.setRotation(rot);
-
-	rot += 20;
-	}
-	*/
 	window->display();
 
 	sf::Time t = clock.getElapsedTime();

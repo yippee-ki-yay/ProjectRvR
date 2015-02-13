@@ -16,6 +16,7 @@ Rocket::Rocket()
 	v.y = 10;
 	shape.setSize(v);
 	shape.setPosition(-100, y);
+	sprite.setPosition(-100, y);
 	type = 0;
 	//sprite.setTexture(*txt);
 	ugao = 0;
@@ -37,7 +38,7 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	sprite.setPosition(x + 400, y + 300);
 	if(type == 1)
 	{
-		sprite.setPosition(x + 400, y + 300);
+		sprite.setPosition(x + 400, y + 300 + sprite.getLocalBounds().height/3);
 	}
 
 }
@@ -111,6 +112,7 @@ void Rocket::reset()
 	shape.setFillColor(sf::Color::Blue);
 	shape.setSize(v);
 	shape.setPosition(-100, y);
+	sprite.setPosition(-100, y);
 	type = 0;
 	points.clear();
 }

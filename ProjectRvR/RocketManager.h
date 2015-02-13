@@ -25,9 +25,7 @@ public:
 
 	void checkBounds();
 
-	bool collision(sf::Sprite a, sf::Sprite b);
-
-	sf::Vector2f rotatedPoint(float x, float y, double angle);
+	bool collision(sf::RenderWindow* window, sf::Sprite& a, sf::Sprite& b);
 
 	Rocket* getRocketAt(float x);				//vraca raketu u tacki
 
@@ -35,15 +33,12 @@ public:
 
 	Rocket* getRockets() { return rockets; }
 
-	sf::Vector2f projection(sf::Vector2f point, sf::Vector2f axis);
+	void checkCollision(sf::RenderWindow* w);
 
-	float MinValue(float a, float b, float c, float d);
+	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz);
 
-	float MaxValue(float a, float b, float c, float d);
+	void ProjectOnAxis(sf::Vector2f* points, sf::Vector2f axis, float& min, float& max);
 
-	void checkCollision();
-
-	//sf::Texture* getTexture() { return &img; }
 
 
 private:

@@ -38,6 +38,9 @@ float a, b, c;
 
 	if(det == 0)
 	{
+		x[2] += 1;
+		y[2] += 1;
+		interpolation(x, y, fun);
 		std::cout << "ne postoji takva funkcija";
 	}
 

@@ -99,146 +99,105 @@ Rocket* RocketManager::getRocketAt(float x)
 }
 
 
-sf::Vector2f RocketManager::rotatedPoint(float x, float y, double angle)
-{
-	sf::Vector2f v;
-	v.x = x*cos(angle) + y*sin(angle);
-	v.y = -x*sin(angle) + y*cos(angle);
-	return v;
-}
-
-sf::Vector2f RocketManager::projection(sf::Vector2f point, sf::Vector2f axis)
-{
-	sf::Vector2f v;
-
-	v.x = axis.x * ((point.x*axis.x + point.y*axis.y)/axis.x*axis.x + axis.y*axis.y);
-	v.y = axis.y * ((point.x*axis.x + point.y*axis.y)/axis.x*axis.x + axis.y*axis.y);
-
-	return v;
-}
-
-float RocketManager::MinValue(float a, float b, float c, float d) 
-{
-    float min = a;
-
-    min = (b < min ? b : min);
-    min = (c < min ? c : min);
-    min = (d < min ? d : min);
-
-    return min;
-}
-
-float RocketManager::MaxValue(float a, float b, float c, float d) {
-    float max = a;
-
-    max = (b > max ? b : max);
-    max = (c > max ? c : max);
-    max = (d > max ? d : max);
-
-    return max;
-}
-
-bool RocketManager::collision(sf::Sprite a, sf::Sprite b)
-{
-	sf::Vector2f tl, tr, bl, br;
-	double angle;
-	angle = a.getRotation();
-	
-	float width = a.getGlobalBounds().width;
-	float height = a.getGlobalBounds().height;
-	float posX = a.getPosition().x;
-	float posY = a.getPosition().y;
-
-    tl = a.getTransform().transformPoint(sf::Vector2f(0,0));
-	tr = a.getTransform().transformPoint(sf::Vector2f(width,0));
-	bl = a.getTransform().transformPoint(sf::Vector2f(0,height));
-	br = a.getTransform().transformPoint(sf::Vector2f(width,height));
-
-	sf::Vector2f tl1, tr1, bl1, br1;
-	double angle1;
-	angle1 = b.getRotation();
-
-	float width1 = b.getGlobalBounds().width;
-	float height1 = b.getGlobalBounds().height;
-	float posX1 = b.getPosition().x;
-	float posY1 = b.getPosition().y;
-
-    tl1 = b.getTransform().transformPoint(sf::Vector2f(0,0));
-	tr1 = b.getTransform().transformPoint(sf::Vector2f(width1,0));
-	bl1 = b.getTransform().transformPoint(sf::Vector2f(0,height1));
-	br1 = b.getTransform().transformPoint(sf::Vector2f(width1,height1));
-
-	sf::Vector2f Axis[4];
-
-	Axis[0].x = tr.x - tl.x;
-	Axis[0].y = tr.y - tl.y;
-	Axis[1].x = tr.x - br.x;
-	Axis[1].y = tr.y - br.y;
-	Axis[2].x = tr1.x - tl1.x;
-	Axis[2].y = tr1.y - tl1.y;
-	Axis[3].x = tr1.x - br1.x;
-	Axis[3].y = tr1.y - br1.y;
-
-
-	for(int i = 0; i < 4;++i)
-	{
-		tl = RocketManager::projection(tl, Axis[i]);
-		tr = RocketManager::projection(tr, Axis[i]);
-		bl = RocketManager::projection(bl, Axis[i]);
-		br = RocketManager::projection(br, Axis[i]);
-
-		tl1 = RocketManager::projection(tl1, Axis[i]);
-		tr1 = RocketManager::projection(tr1, Axis[i]);
-		bl1 = RocketManager::projection(bl1, Axis[i]);
-		br1 = RocketManager::projection(br1, Axis[i]);
-
-	float tmp1 = sqrt(tl.x*tl.x+ tl.y*tl.y);
-	float tmp2 = sqrt(tr.x*tr.x+ tr.y*tr.y);
-	float tmp3 = sqrt(bl.x*bl.x+ bl.y*bl.y);
-	float tmp4 = sqrt(br.x*br.x+ br.y*br.y);
-
-	float tmp5 = sqrt(tl1.x*tl1.x+ tl1.y*tl1.y);
-	float tmp6 = sqrt(tr1.x*tr1.x+ tr1.y*tr1.y);
-	float tmp7 = sqrt(bl1.x*bl1.x+ bl1.y*bl1.y);
-	float tmp8 = sqrt(br1.x*br1.x+ br1.y*br1.y);
-
-	float min1 = RocketManager::MinValue(tmp1, tmp2, tmp3, tmp4);
-	float min2 = RocketManager::MinValue(tmp5, tmp6, tmp7, tmp8);
-
-	float max1 = RocketManager::MaxValue(tmp1, tmp2, tmp3, tmp4);
-	float max2 = RocketManager::MaxValue(tmp5, tmp6, tmp7, tmp8);
-
-	if(min2 <= min1 && max2 >= min1)
-		continue;
-	else
-		return false;
-
-	}
-
-	return true;
-}
-
-void RocketManager::checkCollision()
+void RocketManager::checkCollision(sf::RenderWindow* w)
 {
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{
-		if(rockets[i].getType() == 1)
+		//trenutne napadacke rakete
+		if(rockets[i].getActive() == true && rockets[i].getType() == 0)
 		{
-			for(int j = 0; j < MAX_ROCKETS; j++)
+			for(int j = 0; j < MAX_ROCKETS;++j)
 			{
-				if(rockets[j].getType() == 0)
+				if(rockets[j].getActive() == true && rockets[j].getType() != 0)
 				{
-					if(RocketManager::collision(rockets[i].getSprite(), rockets[j].getSprite()))
+					if(collision(w, rockets[i].getSprite(), rockets[j].getSprite()))
 					{
-						//rockets[i].reset();
-						//rockets[j].reset();
-						std::cout << "COLLISION";
+						rockets[i].reset();
+						rockets[j].reset();
 					}
 				}
+		
 			}
 		}
+	}
+}
 
+
+
+void RocketManager::ProjectOnAxis(sf::Vector2f* points, sf::Vector2f axis, float& min, float& max)
+{
+   min = (points[0].x*axis.x+points[0].y*axis.y);
+   max =  min;
+
+  for (int j = 1; j<4; j++)
+  {
+     float dot_p = (points[j].x*axis.x+points[j].y*axis.y);
+
+	 if(dot_p <min)
+		 min = dot_p;
+
+	 if(dot_p > max)
+		 max = dot_p;
+            
+  }
+}
+
+void RocketManager::getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz)
+{
+	sf::Transform transform = sprite.getTransform();
+    sf::FloatRect rect = sprite.getLocalBounds();
+
+    niz[0] = transform.transformPoint(sf::Vector2f(rect.left, rect.top));  //tl
+    niz[1] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top)); //tr
+    niz[2] = transform.transformPoint(sf::Vector2f(rect.left, rect.top+rect.height));  //bl
+    niz[3] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top+rect.height)); //br
+}
+
+
+bool RocketManager::collision(sf::RenderWindow* w, sf::Sprite& a, sf::Sprite& b)
+{
+
+	/**** Uzimanje tacaka prvog sprita ****/
+	sf::Vector2f pointsA[4];
+	RocketManager::getBoundingPoints(a, pointsA);
+
+	/**** Uzimanje tacaka prvog sprita ****/
+	sf::Vector2f pointsB[4];
+	RocketManager::getBoundingPoints(b, pointsB);
+	
+	
+	/****** Racunanje osa   ******/
+
+	sf::Vector2f Axis[4];
+
+	//0 - tl, 1 - tr, 2 - bl, 3 - br
+
+	//Top Right - Top Left
+	Axis[0].x = pointsA[1].x - pointsA[0].x;
+	Axis[0].y = pointsA[1].y - pointsA[0].y;
+	//Top Right - Bottom Right
+	Axis[1].x = pointsA[1].x - pointsA[3].x;
+	Axis[1].y = pointsA[1].y - pointsA[3].y;
+	//Top left - Bottom Left
+	Axis[2].x = pointsB[0].x - pointsB[2].x;
+	Axis[2].y = pointsB[0].y - pointsB[2].y;
+	//Top left - Top right
+	Axis[3].x = pointsB[0].x - pointsB[1].x;
+	Axis[3].y = pointsB[0].y - pointsB[1].y;
+
+	//idemo po svakoj osi
+	for(int i = 0; i < 4;++i)
+	{
+		float minA, maxA, minB, maxB;
+
+		RocketManager::ProjectOnAxis(pointsA, Axis[i], minA, maxA);
+		RocketManager::ProjectOnAxis(pointsB, Axis[i], minB, maxB);
+
+		if(((minB <= maxA) && (maxB >= minA)))
+			continue;
+		else
+			return false;
 	}
 
-
+	return true;
 }
