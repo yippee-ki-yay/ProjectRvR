@@ -25,7 +25,7 @@ public:
 
 	void checkBounds();
 
-	bool collision(sf::Sprite a, sf::Sprite b);
+	bool collision(sf::RenderWindow* window, sf::Sprite a, sf::Sprite b);
 
 	sf::Vector2f rotatedPoint(float x, float y, double angle);
 
@@ -40,6 +40,8 @@ public:
 	float MinValue(float a, float b, float c, float d);
 
 	float MaxValue(float a, float b, float c, float d);
+
+	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz);
 
 	//sf::Texture* getTexture() { return &img; }
 

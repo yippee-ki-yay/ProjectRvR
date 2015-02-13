@@ -8,7 +8,7 @@ Scene::Scene(int width, int height, std::string title)
 	window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	event = new sf::Event;
 
-	window->setFramerateLimit(50);  //uvek da je 60fps moze da se promeni kasnije
+	window->setFramerateLimit(20);  //uvek da je 60fps moze da se promeni kasnije
 	window->setKeyRepeatEnabled(false);
 
 	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
@@ -86,12 +86,12 @@ void Scene::update()
 
 	e.draw(window);
 
-	window->draw(prvi);
-	window->draw(drugi);
-
 	prvi.setPosition(prvi.getPosition().x+5, prvi.getPosition().y);
 
-	if(manager.collision(prvi, drugi)){
+		window->draw(prvi);
+	window->draw(drugi);
+
+	if(manager.collision(window, prvi, drugi)){
 	prvi.setPosition(100, 100);
 
 		prvi.setRotation(rot);

@@ -111,11 +111,16 @@ sf::Vector2f RocketManager::projection(sf::Vector2f point, sf::Vector2f axis)
 {
 	sf::Vector2f v;
 
-	v.x = axis.x * ((point.x*axis.x + point.y*axis.y)/axis.x*axis.x + axis.y*axis.y);
-	v.y = axis.y * ((point.x*axis.x + point.y*axis.y)/axis.x*axis.x + axis.y*axis.y);
+	v.x = axis.x * (((point.x*axis.x) + (point.y*axis.y))/((axis.x*axis.x) + (axis.y*axis.y)));
+	v.y = axis.y * (((point.x*axis.x) + (point.y*axis.y))/((axis.x*axis.x) + (axis.y*axis.y)));
 
 	return v;
 }
+/*
+sf::Vector2f RocketManager::ProjectOnAxis(float tl, )
+{
+
+}*/
 
 float RocketManager::MinValue(float a, float b, float c, float d) 
 {
@@ -138,69 +143,163 @@ float RocketManager::MaxValue(float a, float b, float c, float d) {
     return max;
 }
 
-bool RocketManager::collision(sf::Sprite a, sf::Sprite b)
+void RocketManager::getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz)
 {
+
+}
+
+
+bool RocketManager::collision(sf::RenderWindow* w, sf::Sprite a, sf::Sprite b)
+{
+
+	/**** Uzimanje tacaka prvog sprita ****/
 	sf::Vector2f tl, tr, bl, br;
-	double angle;
-	angle = a.getRotation();
-	
-	float width = a.getGlobalBounds().width;
-	float height = a.getGlobalBounds().height;
-	float posX = a.getPosition().x;
-	float posY = a.getPosition().y;
 
-    tl = a.getTransform().transformPoint(sf::Vector2f(0,0));
-	tr = a.getTransform().transformPoint(sf::Vector2f(width,0));
-	bl = a.getTransform().transformPoint(sf::Vector2f(0,height));
-	br = a.getTransform().transformPoint(sf::Vector2f(width,height));
+	sf::Transform transform = a.getTransform();
+    sf::FloatRect rect = a.getLocalBounds();
 
+    tl = transform.transformPoint(sf::Vector2f(rect.left, rect.top));
+    tr = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top));
+    bl = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top+rect.height));
+    br = transform.transformPoint(sf::Vector2f(rect.left, rect.top+rect.height));
+
+	/**** Ispis tacaka   *****/
+	sf::CircleShape dot_tl;
+	dot_tl.setPosition(tl.x, tl.y);
+	dot_tl.setRadius(5);
+	dot_tl.setFillColor(sf::Color::Red);
+	w->draw(dot_tl);
+
+	sf::CircleShape dot_tr;
+	dot_tr.setPosition(tr.x, tr.y);
+	dot_tr.setRadius(5);
+	dot_tr.setFillColor(sf::Color::Red);
+	w->draw(dot_tr);
+
+	sf::CircleShape dot_bl;
+	dot_bl.setPosition(bl.x, bl.y);
+	dot_bl.setRadius(5);
+	dot_bl.setFillColor(sf::Color::Red);
+	w->draw(dot_bl);
+
+	sf::CircleShape dot_br;
+	dot_br.setPosition(br.x, br.y);
+	dot_br.setRadius(5);
+	dot_br.setFillColor(sf::Color::Red);
+	w->draw(dot_br);
+
+
+	/**** Uzimanje tacaka prvog sprita ****/
 	sf::Vector2f tl1, tr1, bl1, br1;
-	double angle1;
-	angle1 = b.getRotation();
+	sf::Transform transform1 = b.getTransform();
+    sf::FloatRect rect1 = b.getLocalBounds();
 
-	float width1 = b.getGlobalBounds().width;
-	float height1 = b.getGlobalBounds().height;
-	float posX1 = b.getPosition().x;
-	float posY1 = b.getPosition().y;
+    tl1 = transform1.transformPoint(sf::Vector2f(rect1.left, rect1.top));
+    tr1 = transform1.transformPoint(sf::Vector2f(rect1.left+rect1.width, rect1.top));
+    bl1 = transform1.transformPoint(sf::Vector2f(rect1.left+rect1.width, rect1.top+rect1.height));
+    br1 = transform1.transformPoint(sf::Vector2f(rect1.left, rect1.top+rect1.height));
 
-    tl1 = b.getTransform().transformPoint(sf::Vector2f(0,0));
-	tr1 = b.getTransform().transformPoint(sf::Vector2f(width1,0));
-	bl1 = b.getTransform().transformPoint(sf::Vector2f(0,height1));
-	br1 = b.getTransform().transformPoint(sf::Vector2f(width1,height1));
+	
+	/****** Ispis tacaka     *****/
+	sf::CircleShape dot_tl1;
+	dot_tl1.setPosition(tl1.x, tl1.y);
+	dot_tl1.setRadius(5);
+	dot_tl1.setFillColor(sf::Color::Red);
+	w->draw(dot_tl1);
+
+	sf::CircleShape dot_tr1;
+	dot_tr1.setPosition(tr1.x, tr1.y);
+	dot_tr1.setRadius(5);
+	dot_tr1.setFillColor(sf::Color::Red);
+	w->draw(dot_tr1);
+
+	sf::CircleShape dot_bl1;
+	dot_bl1.setPosition(bl1.x, bl1.y);
+	dot_bl1.setRadius(5);
+	dot_bl1.setFillColor(sf::Color::Red);
+	w->draw(dot_bl1);
+
+	sf::CircleShape dot_br1;
+	dot_br1.setPosition(br1.x, br1.y);
+	dot_br1.setRadius(5);
+	dot_br1.setFillColor(sf::Color::Red);
+	w->draw(dot_br1);
+
+
+	/****** Racunanje osa   ******/
 
 	sf::Vector2f Axis[4];
 
+	//Top Right - Top Left
 	Axis[0].x = tr.x - tl.x;
 	Axis[0].y = tr.y - tl.y;
+
+		sf::CircleShape axis_shape;
+	axis_shape.setPosition(Axis[0].x, Axis[0].y);
+	axis_shape.setRadius(5);
+	axis_shape.setFillColor(sf::Color::Green);
+	w->draw(axis_shape);
+
+	//Top Right - Bottom Right
 	Axis[1].x = tr.x - br.x;
 	Axis[1].y = tr.y - br.y;
-	Axis[2].x = tr1.x - tl1.x;
-	Axis[2].y = tr1.y - tl1.y;
-	Axis[3].x = tr1.x - br1.x;
-	Axis[3].y = tr1.y - br1.y;
+	//Top left - Bottom Left
+	Axis[2].x = tl1.x - bl1.x;
+	Axis[2].y = tl1.y - bl1.y;
+	//Top left - Top right
+	Axis[3].x = tl1.x - tr1.x;
+	Axis[3].y = tl1.y - tr1.y;
 
 
 	for(int i = 0; i < 4;++i)
 	{
-		tl = RocketManager::projection(tl, Axis[i]);
-		tr = RocketManager::projection(tr, Axis[i]);
-		bl = RocketManager::projection(bl, Axis[i]);
-		br = RocketManager::projection(br, Axis[i]);
+		//ovu su 8 tacaka koje su sada projektovane na osu
+		sf::Vector2f ptl = RocketManager::projection(tl, Axis[i]);
+		sf::Vector2f ptr = RocketManager::projection(tr, Axis[i]);
+		sf::Vector2f pbl = RocketManager::projection(bl, Axis[i]);
+		sf::Vector2f pbr = RocketManager::projection(br, Axis[i]);
 
-		tl1 = RocketManager::projection(tl1, Axis[i]);
-		tr1 = RocketManager::projection(tr1, Axis[i]);
-		bl1 = RocketManager::projection(bl1, Axis[i]);
-		br1 = RocketManager::projection(br1, Axis[i]);
+		if(i == 0){
+	sf::CircleShape p_tl1;
+	p_tl1.setPosition(ptl.x, ptl.y);
+	std::cout<<ptl.x<<" "<<ptl.y<<std::endl;
+	p_tl1.setRadius(5);
+	p_tl1.setFillColor(sf::Color::Blue);
+	w->draw(p_tl1);
 
-	float tmp1 = sqrt(tl.x*tl.x+ tl.y*tl.y);
-	float tmp2 = sqrt(tr.x*tr.x+ tr.y*tr.y);
-	float tmp3 = sqrt(bl.x*bl.x+ bl.y*bl.y);
-	float tmp4 = sqrt(br.x*br.x+ br.y*br.y);
+	sf::CircleShape p_tr1;
+	p_tr1.setPosition(ptr.x, ptr.y);
+	p_tr1.setRadius(5);
+	p_tr1.setFillColor(sf::Color::Green);
+	w->draw(p_tr1);
 
-	float tmp5 = sqrt(tl1.x*tl1.x+ tl1.y*tl1.y);
-	float tmp6 = sqrt(tr1.x*tr1.x+ tr1.y*tr1.y);
-	float tmp7 = sqrt(bl1.x*bl1.x+ bl1.y*bl1.y);
-	float tmp8 = sqrt(br1.x*br1.x+ br1.y*br1.y);
+	sf::CircleShape p_bl1;
+	p_bl1.setPosition(pbl.x, pbl.y);
+	p_bl1.setRadius(5);
+	p_bl1.setFillColor(sf::Color::Yellow);
+	w->draw(p_bl1);
+
+	sf::CircleShape p_br1;
+	p_br1.setPosition(pbr.x, pbr.y);
+	p_br1.setRadius(5);
+	p_br1.setFillColor(sf::Color::White);
+	w->draw(p_br1);}
+
+
+		sf::Vector2f ptl1 = RocketManager::projection(tl1, Axis[i]);
+		sf::Vector2f ptr1 = RocketManager::projection(tr1, Axis[i]);
+		sf::Vector2f pbl1 = RocketManager::projection(bl1, Axis[i]);
+		sf::Vector2f pbr1 = RocketManager::projection(br1, Axis[i]);
+
+ 	float tmp1 = Axis[i].x*tl.x + Axis[i].y*tl.y;
+	float tmp2 = Axis[i].x*tr.x + Axis[i].y*tr.y;
+	float tmp3 = Axis[i].x*bl.x + Axis[i].y*bl.y;
+	float tmp4 = Axis[i].x*br.x + Axis[i].y*br.y;
+
+	float tmp5 = Axis[i].x*tl1.x + Axis[i].y*tl1.y;
+	float tmp6 = Axis[i].x*tr1.x + Axis[i].y*tr1.y;
+	float tmp7 = Axis[i].x*bl1.x + Axis[i].y*bl1.y;
+	float tmp8 = Axis[i].x*br1.x + Axis[i].y*br1.y;
 
 	float min1 = RocketManager::MinValue(tmp1, tmp2, tmp3, tmp4);
 	float min2 = RocketManager::MinValue(tmp5, tmp6, tmp7, tmp8);
@@ -208,7 +307,9 @@ bool RocketManager::collision(sf::Sprite a, sf::Sprite b)
 	float max1 = RocketManager::MaxValue(tmp1, tmp2, tmp3, tmp4);
 	float max2 = RocketManager::MaxValue(tmp5, tmp6, tmp7, tmp8);
 
-	if(min2 <= min1 && max2 >= min1)
+	//std::cout<<min1<<" "<<min2<<" "<<max1<<" "<<max2<<std::endl;
+
+	if(min2 <= max1 && max2 >= min1)
 		continue;
 	else
 		return false;
