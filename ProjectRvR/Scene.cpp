@@ -65,7 +65,6 @@ void Scene::update()
 					interpolation(x, y, r->getFun());
 
 					e.start();
-
 				}
 				
 			}
@@ -83,12 +82,13 @@ void Scene::update()
 	base.draw(window);
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
+	manager.checkCollision();
 
 	e.draw(window);
 
-	window->draw(prvi);
-	window->draw(drugi);
-
+	//window->draw(prvi);
+	//window->draw(drugi);
+	/*
 	prvi.setPosition(prvi.getPosition().x+5, prvi.getPosition().y);
 
 	if(manager.collision(prvi, drugi)){
@@ -109,7 +109,7 @@ void Scene::update()
 
 	rot += 20;
 	}
-
+	*/
 	window->display();
 
 	sf::Time t = clock.getElapsedTime();

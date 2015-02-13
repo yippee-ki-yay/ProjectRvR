@@ -217,3 +217,28 @@ bool RocketManager::collision(sf::Sprite a, sf::Sprite b)
 
 	return true;
 }
+
+void RocketManager::checkCollision()
+{
+	for(int i = 0; i < MAX_ROCKETS; i++)
+	{
+		if(rockets[i].getType() == 1)
+		{
+			for(int j = 0; j < MAX_ROCKETS; j++)
+			{
+				if(rockets[j].getType() == 0)
+				{
+					if(RocketManager::collision(rockets[i].getSprite(), rockets[j].getSprite()))
+					{
+						//rockets[i].reset();
+						//rockets[j].reset();
+						std::cout << "COLLISION";
+					}
+				}
+			}
+		}
+
+	}
+
+
+}

@@ -35,6 +35,10 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	rotate();
 	shape.setPosition(x + 400, y + 300); //transliranje(centar(0, 0) je gornji levi ugao)
 	sprite.setPosition(x + 400, y + 300);
+	if(type == 1)
+	{
+		sprite.setPosition(x + 400, y + 300);
+	}
 
 }
 
@@ -73,6 +77,7 @@ void Rocket::rotate()
 	//std::cout << "alfa" << alpha << std::endl;
 	ugao = alpha;
 	sprite.setRotation(alpha);
+	shape.setRotation(alpha);
 	sprite.getTransform();
 }
 

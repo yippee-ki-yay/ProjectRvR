@@ -41,6 +41,8 @@ public:
 
 	float MaxValue(float a, float b, float c, float d);
 
+	void checkCollision();
+
 	//sf::Texture* getTexture() { return &img; }
 
 
