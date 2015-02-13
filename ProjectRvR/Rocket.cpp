@@ -16,6 +16,7 @@ Rocket::Rocket()
 	v.y = 10;
 	shape.setSize(v);
 	shape.setPosition(-100, y);
+	sprite.setPosition(-100, y);
 	type = 0;
 	//sprite.setTexture(*txt);
 	ugao = 0;
@@ -106,6 +107,7 @@ void Rocket::reset()
 	shape.setFillColor(sf::Color::Blue);
 	shape.setSize(v);
 	shape.setPosition(-100, y);
+	sprite.setPosition(-100, y);
 	type = 0;
 	points.clear();
 }
