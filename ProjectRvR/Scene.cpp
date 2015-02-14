@@ -60,7 +60,7 @@ void Scene::update()
 					float y[3] = {-300, -150, -300};
 
 					x[1] = rand()%200 - 100;
-					y[1] = rand()%600 - 300;
+					y[1] = rand()%500 - 250;
 
 					interpolation(x, y, r->getFun());
 
@@ -78,11 +78,13 @@ void Scene::update()
 
 	/** TEST DEO KODA OKO KRETANJA */
 
+	explosions.draw(window);
+
 	base.draw(window);
 
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
-	manager.checkCollision(window);
+	manager.checkCollision(window, &explosions);
 
 	window->display();
 

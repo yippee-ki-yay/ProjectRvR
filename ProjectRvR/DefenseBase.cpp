@@ -12,7 +12,7 @@ DefenseBase::DefenseBase()
 	detectionLine.setFillColor(sf::Color::Green);
 
 	collisionLine.setSize(sf::Vector2f(800, 2));
-	collisionLine.setPosition(200, 0);
+	collisionLine.setPosition(150, 0);
 	collisionLine.setRotation(90);
 	collisionLine.setFillColor(sf::Color::White);
 

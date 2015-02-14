@@ -19,7 +19,7 @@ void RocketManager::draw(sf::RenderWindow* window)
 	{
 		if(rockets[i].getActive() == true)
 		{
-			window->draw(rockets[i].getShape());
+			//window->draw(rockets[i].getShape());
 			window->draw(rockets[i].getSprite());
 			rockets[i].move();
 
@@ -99,7 +99,7 @@ Rocket* RocketManager::getRocketAt(float x)
 }
 
 
-void RocketManager::checkCollision(sf::RenderWindow* w)
+void RocketManager::checkCollision(sf::RenderWindow* w, ExplosionManager* manager)
 {
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{
@@ -112,6 +112,7 @@ void RocketManager::checkCollision(sf::RenderWindow* w)
 				{
 					if(collision(w, rockets[i].getSprite(), rockets[j].getSprite()))
 					{
+						manager->setExplosion(rockets[i].getSprite().getPosition().x, rockets[i].getSprite().getPosition().y);
 						rockets[i].reset();
 						rockets[j].reset();
 					}

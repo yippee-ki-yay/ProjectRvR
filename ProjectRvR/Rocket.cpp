@@ -38,7 +38,7 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	sprite.setPosition(x + 400, y + 300);
 	if(type == 1)
 	{
-		sprite.setPosition(x + 400, y + 300 + sprite.getLocalBounds().height/3);
+		sprite.setPosition(x + 400 + sprite.getLocalBounds().width/2, y + 300 + sprite.getLocalBounds().height/2);
 	}
 
 }

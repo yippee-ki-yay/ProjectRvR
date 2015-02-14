@@ -8,7 +8,7 @@
 #include "RocketPath.h"
 #include "Rocket.h"
 #include "DefenseBase.h"
-#include "Explosion.h"
+#include "ExplosionManager.h"
 
 class Scene
 {
@@ -26,6 +26,7 @@ private:
 	sf::Event* event;
 	DefenseBase base;
 	RocketManager manager;
+	ExplosionManager explosions;
 	RocketPath* testPath;
 	Rocket* r1;
 

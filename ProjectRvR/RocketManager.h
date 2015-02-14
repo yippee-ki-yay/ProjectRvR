@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Rocket.h"
+#include "ExplosionManager.h"
 
 /**
 	Klasa koja napravi X broj raketa, koje se trenutno nalaze na ekranu
@@ -33,7 +34,7 @@ public:
 
 	Rocket* getRockets() { return rockets; }
 
-	void checkCollision(sf::RenderWindow* w);
+	void checkCollision(sf::RenderWindow* w, ExplosionManager* manager);
 
 	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz);
 

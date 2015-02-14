@@ -20,12 +20,16 @@ void Explosion::draw(sf::RenderWindow* window)
 	{
 		sprite.setTextureRect(sf::IntRect(i, 0, 64, 64));
 		i += 64;
-		std::cout<<"proslo 2 sekunde"<<std::endl;
 		c.restart();
 	}
 
 	if(i < 576)
 		window->draw(sprite);
+	else
+	{
+		m_start = false;
+		Explosion::reset();
+	}
 	}
 }
 
