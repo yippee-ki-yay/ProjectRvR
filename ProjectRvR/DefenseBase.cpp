@@ -28,17 +28,14 @@ void DefenseBase::draw(sf::RenderWindow* window)
 
 void DefenseBase::checkFirstWall(RocketManager* rockets)
 {
-	if(rockets->hasRocketsAt(detectionLine.getPosition().x))
-	{
-		Rocket* r = rockets->getRocketAt((detectionLine.getPosition().x));
-		det_rockets.push_back(r);
-	}
+	rockets->detectRocket(detectionLine.getPosition().x, &det_rockets);
 }
 
 void DefenseBase::gatherPoints(RocketManager* rockets)
 {
 	//GRESKA je sto kad izbacimo iz vektora smanji se velicina
-	for(unsigned int i = 0; i < det_rockets.size(); i++)
+	//Da li se i menja?
+	for(int i = det_rockets.size()-1; i >= 0; i--)
 	{
 	    //Zbog trenutne interpolacije koja radi sa tri tacke uzimamo x,y poz na 3 mesta
 
@@ -47,6 +44,7 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 	//	if(det_rockets[i]->getType() == 0)
 		{
+
 			if(det_rockets[i]->getShape().getPosition().x == 500)
 			{
 				det_rockets[i]->setPoint(det_rockets[i]->getShape().getPosition());
@@ -65,7 +63,7 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 				//std::cout<<"Dodao\n";
 			}
 
-			if(det_rockets[i]->getCount() == 3)
+			if(det_rockets[i]->getCount() >= 3)
 			{
 				std::cout<<"Odbrana "<<k<<std::endl;
 		        k++;

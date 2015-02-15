@@ -77,7 +77,7 @@ void RocketManager::checkBounds()
 
 }
 
-bool RocketManager::hasRocketsAt(float x)
+bool RocketManager::hasRocketsAt(int x)
 {
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{
@@ -88,7 +88,18 @@ bool RocketManager::hasRocketsAt(float x)
 	return false;
 }
 
-Rocket* RocketManager::getRocketAt(float x)
+void RocketManager::detectRocket(int x, std::vector<Rocket*>* vec)
+{
+	for(int i = 0; i < MAX_ROCKETS; ++i)
+	{
+		if((rockets[i].getShape().getPosition().x == x) && (rockets[i].getType() == 0))
+		{
+ 			vec->push_back(&rockets[i]);
+		}
+	}
+}
+
+Rocket* RocketManager::getRocketAt(int x)
 {
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{

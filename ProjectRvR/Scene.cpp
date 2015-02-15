@@ -73,8 +73,8 @@ void Scene::update()
 
 	window->clear();
 
-	base.checkFirstWall(&manager);
 	base.gatherPoints(&manager);
+	base.checkFirstWall(&manager);
 
 	/** TEST DEO KODA OKO KRETANJA */
 

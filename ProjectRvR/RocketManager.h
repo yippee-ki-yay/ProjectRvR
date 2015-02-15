@@ -28,9 +28,11 @@ public:
 
 	bool collision(sf::RenderWindow* window, sf::Sprite& a, sf::Sprite& b);
 
-	Rocket* getRocketAt(float x);				//vraca raketu u tacki
+	Rocket* getRocketAt(int x);				//vraca raketu u tacki
 
-	bool hasRocketsAt(float x);				//da li ima raketu u tacki
+	bool hasRocketsAt(int x);				//da li ima raketu u tacki
+
+	void detectRocket(int x, std::vector<Rocket*>* vec);
 
 	Rocket* getRockets() { return rockets; }
 

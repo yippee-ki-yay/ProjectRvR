@@ -32,6 +32,8 @@ private:
 	std::vector<Rocket*> det_rockets;
 	int k;
 
+	sf::Clock clock;
+
 	void setTarget(RocketManager* rockets, int i);
 };
 
