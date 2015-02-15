@@ -34,7 +34,7 @@ float a, b, c;
 		det = det + (tmp[0][i]*(tmp[1][(i+1)%3]*tmp[2][(i+2)%3] - tmp[1][(i+2)%3]*tmp[2][(i+1)%3]));
 	}*/
 
-	std::cout << det;
+	//std::cout << det;
 
 	if(det == 0)
 	{

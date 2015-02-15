@@ -36,7 +36,7 @@ public:
 
 	void checkCollision(sf::RenderWindow* w, ExplosionManager* manager);
 
-	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz);
+	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz, sf::RenderWindow* w);
 
 	void ProjectOnAxis(sf::Vector2f* points, sf::Vector2f axis, float& min, float& max);
 

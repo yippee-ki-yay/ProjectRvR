@@ -82,9 +82,9 @@ void Scene::update()
 
 	base.draw(window);
 
+	manager.checkCollision(window, &explosions);
 	manager.draw(window);  //crta rakete
 	manager.checkBounds();
-	manager.checkCollision(window, &explosions);
 
 	window->display();
 

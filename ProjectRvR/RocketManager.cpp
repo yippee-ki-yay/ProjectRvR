@@ -108,7 +108,7 @@ void RocketManager::checkCollision(sf::RenderWindow* w, ExplosionManager* manage
 		{
 			for(int j = 0; j < MAX_ROCKETS;++j)
 			{
-				if(rockets[j].getActive() == true && rockets[j].getType() != 0)
+				if(rockets[j].getActive() == true && rockets[j].getType() == 1)
 				{
 					if(collision(w, rockets[i].getSprite(), rockets[j].getSprite()))
 					{
@@ -143,7 +143,7 @@ void RocketManager::ProjectOnAxis(sf::Vector2f* points, sf::Vector2f axis, float
   }
 }
 
-void RocketManager::getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz)
+void RocketManager::getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz, sf::RenderWindow* w)
 {
 	sf::Transform transform = sprite.getTransform();
     sf::FloatRect rect = sprite.getLocalBounds();
@@ -152,6 +152,31 @@ void RocketManager::getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz)
     niz[1] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top)); //tr
     niz[2] = transform.transformPoint(sf::Vector2f(rect.left, rect.top+rect.height));  //bl
     niz[3] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top+rect.height)); //br
+
+		sf::CircleShape c1;
+	c1.setPosition(niz[0]);
+	c1.setRadius(3);
+	c1.setFillColor(sf::Color::Red);
+	w->draw(c1);
+
+		sf::CircleShape c2;
+	c2.setPosition(niz[1]);
+	c2.setRadius(3);
+	c2.setFillColor(sf::Color::Green);
+	w->draw(c2);
+
+		sf::CircleShape c3;
+	c3.setPosition(niz[2]);
+	c3.setRadius(3);
+	c3.setFillColor(sf::Color::Green);
+	w->draw(c3);
+
+		sf::CircleShape c4;
+	c4.setPosition(niz[3]);
+	c4.setRadius(3);
+	c4.setFillColor(sf::Color::Green);
+	w->draw(c4);
+	
 }
 
 
@@ -160,11 +185,43 @@ bool RocketManager::collision(sf::RenderWindow* w, sf::Sprite& a, sf::Sprite& b)
 
 	/**** Uzimanje tacaka prvog sprita ****/
 	sf::Vector2f pointsA[4];
-	RocketManager::getBoundingPoints(a, pointsA);
+	RocketManager::getBoundingPoints(a, pointsA, w);
 
-	/**** Uzimanje tacaka prvog sprita ****/
+	/**** Uzimanje tacaka drugog sprita ****/
 	sf::Vector2f pointsB[4];
-	RocketManager::getBoundingPoints(b, pointsB);
+	//RocketManager::getBoundingPoints(b, pointsB);
+
+	sf::Transform transform = b.getTransform();
+    sf::FloatRect rect = b.getLocalBounds();
+
+    pointsB[0] = transform.transformPoint(sf::Vector2f(rect.left+100, rect.top+8));  //tl
+    pointsB[1] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top+8)); //tr
+    pointsB[2] = transform.transformPoint(sf::Vector2f(rect.left+100, rect.top+rect.height-12));  //bl
+    pointsB[3] = transform.transformPoint(sf::Vector2f(rect.left+rect.width, rect.top+rect.height-12)); //br
+
+	sf::CircleShape c1;
+	c1.setPosition(pointsB[0]);
+	c1.setRadius(3);
+	c1.setFillColor(sf::Color::Red);
+	w->draw(c1);
+
+		sf::CircleShape c2;
+	c2.setPosition(pointsB[1]);
+	c2.setRadius(3);
+	c2.setFillColor(sf::Color::Green);
+	w->draw(c2);
+
+		sf::CircleShape c3;
+	c3.setPosition(pointsB[2]);
+	c3.setRadius(3);
+	c3.setFillColor(sf::Color::Green);
+	w->draw(c3);
+
+		sf::CircleShape c4;
+	c4.setPosition(pointsB[3]);
+	c4.setRadius(3);
+	c4.setFillColor(sf::Color::Green);
+	w->draw(c4);
 	
 	
 	/****** Racunanje osa   ******/

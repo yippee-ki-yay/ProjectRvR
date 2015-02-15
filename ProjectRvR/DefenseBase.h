@@ -27,10 +27,10 @@ public:
 
 private:
 	sf::RectangleShape zgrada;
-	//Line su rectangle shape da bi mogli da imaju i width ako treba
 	sf::RectangleShape detectionLine;
 	sf::RectangleShape collisionLine;
 	std::vector<Rocket*> det_rockets;
+	int k;
 
 	void setTarget(RocketManager* rockets, int i);
 };
