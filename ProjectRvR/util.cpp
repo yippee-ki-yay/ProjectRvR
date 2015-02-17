@@ -39,11 +39,11 @@ float a, b, c;
 	if(det == 0)
 	{
 		x[2] += 1;
-		y[2] += 1;
+		y[2] = fun[0]*x[2]*x[2] + fun[1]*x[2] + fun[2];
 		interpolation(x, y, fun);
 		std::cout << "ne postoji takva funkcija";
 	}
-
+	else
 	for(int i = 0; i < 3; i++)						// izracunavanje elemenata inverzne matrice
 	{
 		for(int j = 0; j < 3; j++)

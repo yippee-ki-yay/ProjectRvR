@@ -73,7 +73,7 @@ void Rocket::rotate()
 	alpha = alpha*180/3.14;
 
 	//if(type == 1)
-	//	alpha = 180 + alpha;
+		//alpha = 180 + alpha;
 
 	//std::cout << "alfa" << alpha << std::endl;
 	ugao = alpha;
