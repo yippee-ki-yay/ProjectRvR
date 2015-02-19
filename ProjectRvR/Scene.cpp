@@ -11,7 +11,7 @@ Scene::Scene(int width, int height, std::string title)
 	window->setFramerateLimit(30);  //uvek da je 30fps moze da se promeni kasnije
 	window->setKeyRepeatEnabled(false);
 
-	testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
+	//testPath = new RocketPath(0, 600); //ovo je u sustini x vrednost funkcije 0..600
 
 	srand(time(NULL));
 
@@ -55,6 +55,7 @@ void Scene::update()
 			{
 				if(manager.hasRockets())
 				{
+					std::cout << "DODAO NAPAD" << std::endl;
 					Rocket* r = manager.getRocket(RocketManager::ATTACK);
 					float x[3] = {400, 0, -400};
 					float y[3] = {-300, -150, -300};
@@ -73,18 +74,19 @@ void Scene::update()
 
 	window->clear();
 
-	base.gatherPoints(&manager);
 	base.checkFirstWall(&manager);
-
+	base.gatherPoints(&defManager);
 	/** TEST DEO KODA OKO KRETANJA */
 
 	explosions.draw(window);
 
 	base.draw(window);
 
-	manager.checkCollision(window, &explosions);
+	manager.checkCollision(window, &explosions, &defManager);
 	manager.draw(window);  //crta rakete
+	defManager.draw(window);
 	manager.checkBounds();
+	//manager.printActive();
 
 	window->display();
 

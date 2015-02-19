@@ -36,16 +36,24 @@ public:
 
 	Rocket* getRockets() { return rockets; }
 
-	void checkCollision(sf::RenderWindow* w, ExplosionManager* manager);
+	void checkCollision(sf::RenderWindow* w, ExplosionManager* manager, RocketManager* defrockets);
 
 	void getBoundingPoints(sf::Sprite& sprite, sf::Vector2f* niz, sf::RenderWindow* w);
 
 	void ProjectOnAxis(sf::Vector2f* points, sf::Vector2f axis, float& min, float& max);
 
+	void printActive() 
+	{
+		int tmp = 0;
+		for(int i = 0; i < MAX_ROCKETS; i++)
+			if(rockets[i].getActive() == true)
+				tmp++;
+		std::cout << tmp << std::endl;
 
-
+	}
+	
 private:
-	static const int MAX_ROCKETS = 60;  //max number of rockets on screen
+	static const int MAX_ROCKETS = 10;  //max number of rockets on screen
 	Rocket rockets[MAX_ROCKETS]; 
 	bool outOfRockets;
 	//sf::Texture img;
