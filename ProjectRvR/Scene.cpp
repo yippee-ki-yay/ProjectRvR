@@ -15,18 +15,6 @@ Scene::Scene(int width, int height, std::string title)
 
 	srand(time(NULL));
 
-	teksture.loadFromFile("rocket3.jpg");
-
-	prvi.setTexture(teksture);
-	drugi.setTexture(teksture);
-
-	prvi.setPosition(100, 100);
-
-	drugi.setPosition(400, 100);
-
-	prvi.setRotation(-90);
-	drugi.setRotation(-90);
-
 	rot = 0;
 
 }
@@ -55,6 +43,12 @@ void Scene::update()
 			{
 				if(manager.hasRockets())
 				{
+					sf::Time t = fireClock.getElapsedTime();
+
+					std::cout<<t.asMilliseconds()<<std::endl;
+
+					if(t.asMilliseconds() >= 500)
+					{
 					std::cout << "DODAO NAPAD" << std::endl;
 					Rocket* r = manager.getRocket(RocketManager::ATTACK);
 					float x[3] = {400, 0, -400};
@@ -64,6 +58,9 @@ void Scene::update()
 					y[1] = rand()%500 - 250;
 
 					interpolation(x, y, r->getFun());
+
+					fireClock.restart();
+					}
 
 				}
 				

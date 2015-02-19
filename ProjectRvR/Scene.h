@@ -37,6 +37,7 @@ private:
 	int rot;
 
 	sf::Clock clock;
+	sf::Clock fireClock;
 
 };
 
