@@ -88,6 +88,21 @@ float a, b, c;
 
 }
 
+void linearFunc(float x1, float x2, float y1, float y2, float* fun)
+{
+	float k, n;
+	k = (y2 - y1)/(x2 -x1);
+	n = y1 - k*x1;
 
 
+	fun[0] = 0;
+	fun[1] = -k;
+	fun[2] = -n;
+
+}
+
+//void checkColl(RocketManager* defR, RocketManager* ofR, sf::RenderWindow* window, ExplosionManager* exp)
+//{
+
+//}
 

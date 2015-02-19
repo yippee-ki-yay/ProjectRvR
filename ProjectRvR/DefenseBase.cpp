@@ -65,7 +65,7 @@ void DefenseBase::gatherPoints(RocketManager* rockets)
 
 			if(det_rockets[i]->getCount() >= 3)
 			{
-				std::cout<<"Odbrana "<<k<<std::endl;
+				//std::cout<<"Odbrana "<<k<<std::endl;
 		        k++;
 
 				setTarget(rockets, i);
@@ -90,7 +90,7 @@ void DefenseBase::setTarget(RocketManager* rockets, int i)
 
 		Rocket *r = rockets->getRocket(RocketManager::DEFENSE);
 		float tmp[3];		//funkcija napadacke rakete
-
+		std::cout << "DODAO ODBRANU" << std::endl;
 		//treba nam niz tacaka za onaj algo. interpolacije pa to ovde popunjavamo
 		float x[3], y[3];
 		for(int j = 0; j < 3; ++j)
@@ -108,16 +108,19 @@ void DefenseBase::setTarget(RocketManager* rockets, int i)
 		float midX = (startX + targetX)/2;	//damo tacku izmedju, da se krece po linearnoj funkciji
 		float midY = (startY + targetY)/2;
 
-		float x1[3];
-		float y1[3];
+		//float x1[3];
+		//float y1[3];
 
-		x1[0] = startX; x1[1] = midX; x1[2] = targetX;	//postavimo vrednosti za interpolaciju
-		y1[0] = startY; y1[1] = midY; y1[2] = targetY;	
+		//x1[0] = startX; x1[1] = midX; x1[2] = targetX;	//postavimo vrednosti za interpolaciju
+		//y1[0] = startY; y1[1] = midY; y1[2] = targetY;	
 
-		interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
-		//r->setType(1);
+		//interpolation(x1, y1, r->getFun());	//izracunamo linearnu funkciju po kojoj se krece, i ubacimo u odbrambenu raketu
+
+		linearFunc(startX, targetX, startY, targetY, r->getFun());
 
 		r->setX(-400);	//postavljanje zbog crtanja, krece iz baze
 		r->setY(-300);
+		std::cout << r->getX() << " " << r->getY() << std::endl;
+		std::cout << *(r->getFun()) << " " << *(r->getFun() + 1) << " " << *(r->getFun() + 2) << std::endl;
 
 }

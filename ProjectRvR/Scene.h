@@ -26,8 +26,8 @@ private:
 	sf::Event* event;
 	DefenseBase base;
 	RocketManager manager;
+	RocketManager defManager;
 	ExplosionManager explosions;
-	RocketPath* testPath;
 	Rocket* r1;
 
 	sf::Texture teksture;

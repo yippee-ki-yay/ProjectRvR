@@ -106,26 +106,29 @@ Rocket* RocketManager::getRocketAt(int x)
 		if(rockets[i].getShape().getPosition().x == x)					//TODO: izmeniti da raketa ima metodu getPosition(), da se ne poziva preko shape-a
 			return &rockets[i];
 	}
+	std::cout << "nije dobio raketu" << std::endl;
 	return NULL;
 }
 
 
-void RocketManager::checkCollision(sf::RenderWindow* w, ExplosionManager* manager)
+void RocketManager::checkCollision(sf::RenderWindow* w, ExplosionManager* manager, RocketManager* defrockets)
 {
+	Rocket* drockets = defrockets->getRockets();
 	for(int i = 0; i < MAX_ROCKETS; i++)
 	{
 		//trenutne napadacke rakete
 		if(rockets[i].getActive() == true && rockets[i].getType() == 0)
 		{
-			for(int j = 0; j < MAX_ROCKETS;++j)
+			for(int j = 0; j < MAX_ROCKETS; j++)
 			{
-				if(rockets[j].getActive() == true && rockets[j].getType() == 1)
+				if(drockets[j].getActive() == true && drockets[j].getType() == 1)
 				{
-					if(collision(w, rockets[i].getSprite(), rockets[j].getSprite()))
+					if(collision(w, rockets[i].getSprite(), drockets[j].getSprite()))
 					{
 						manager->setExplosion(rockets[i].getSprite().getPosition().x, rockets[i].getSprite().getPosition().y);
 						rockets[i].reset();
-						rockets[j].reset();
+						drockets[j].reset();
+						break;
 					}
 				}
 		

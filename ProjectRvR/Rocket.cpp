@@ -27,9 +27,9 @@ void Rocket::move()		//pomeranje x-a i racunanje y-a
 	//shape.setPosition(x, y);
 
 	if(type == 0)
-		x -= 10;							
+		x -= 4;							
 	else
-		x += 10;
+		x += 4;
 	
 	y = fun[0]*x*x + fun[1]*x + fun[2];
 
